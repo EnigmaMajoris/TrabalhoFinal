@@ -1,0 +1,218 @@
+---
+title: "TITANIC: Explorando dados do naufrágio"
+author: "Majory Melo"
+date: 02/04/2023
+format: html
+editor: visual
+toc: true
+toc-depth: 4
+toc-location: left
+number-sections: true
+number-depth: 4
+theme: 
+  light: [flatly, ajustes.css] 
+  dark: [darkly, ajustes.css]
+execute:
+  echo: true
+  warning: false
+lang: pt
+---
+
+# Introdução
+
+O presente documento é parte integrante do trabalho de conclusão do Curso de Verão IME-USP 2022 - Relatórios reprodutíveis com R.
+
+# A História do Titanic
+
+[![RMS Titanic partindo de Southampton em 10 de abril de 1912](imagens/RMS_Titanic_3.jpg){fig-alt="RMS Titanic partindo de Southampton em 10 de abril de 1912" fig-align="left" width="800"}](https://pt.wikipedia.org/wiki/Ficheiro:RMS_Titanic_3.jpg)
+
+No dia 10 de abril de 1912, o maior transatlântico já construído até então zarpava do porto de Southampton, na Inglaterra, com destino a Nova York, em sua viagem inaugural.
+
+Na madrugada do dia 14 para o dia 15 de abril, o luxuoso transatlântico colidiu com um iceberg no Atlântico Norte por volta da meia-noite, afundando em menos de três horas. Dos 2.224 passageiros e tripulantes, mais de 1500 pessoas morreram e um pouco mais de 700 conseguiram ser resgatadas pelo navio Carpathia.
+
+## Tragetória
+
+blábláblá
+
+```{r}
+  library(leaflet)
+  leaflet()|>
+  leaflet::addProviderTiles(provider = "Esri.WorldStreetMap")|>
+  addMarkers(lng=-5.90171, lat=54.61473, popup="Local de Construção - Estaleiro Harland & Wolff")|>
+  addMarkers(lng=-1.43570,lat=50.90980, popup="Partida - Southampton")|>
+  addMarkers(lng=-1.61151,lat=49.64590, popup="Primeira Parada - Cherbourg")|>
+  addMarkers(lng=-8.629906,lat=51.685049, popup="Segunda Parada - Queenstown")|>
+  addMarkers(lng=-74.06663,lat=40.62720, popup="Destino - Nova York")|> 
+  addMarkers(lng=-49.946944,lat=41.725556, popup="Local do Naufrágio")
+```
+
+## Dados sobre Passageiros e Sobreviventes
+
+|     Classe     | Passageiros | Sobreviventes |
+|:--------------:|:-----------:|:-------------:|
+|     **1**      |     325     |      202      |
+|     **2**      |     285     |      118      |
+|     **3**      |     706     |      178      |
+| **Tripulação** |     908     |      212      |
+|   **Totais**   |    2.224    |      710      |
+
+: **Tabela 1: Classe x Passageiros x Sobreviventes**
+
+## Legado
+
+De todos os naufrágios conhecidos até hoje, o Titanic é sem dúvidas o mais memorável. Isso se deve a vários fatores como por exemplo, a grande publicidade feita ao seu lançamento, foi considerado o navio inafundável; negligência corporativa, por não terem equipado o navio com coletes e botes salva-vidas suficientes; negligência humana, relatos apontam que o capitão apesar de ter sido avisado sobre o potencial dos icebergs nas águas do norte, manteve o Titanic cruzando o Atlântico a toda velocidade. E por fim, condições climáticas. Pessoas que não se afogaram, morreram de hipotermia nas águas gélidas.
+
+Como legado, a catástrofe atiçou o fascício das pessoas em querer saber mais detalhes sobre o evento e assim, desde então tem-se livros, documentários, museus e filmes para o deleite desse público.
+
+Mas o legado mais importante, é a revisão e criação de processos, normas e legislações marítimas.
+
+### Destroços
+
+Por muitos anos exploradores traçaram planos de encontrar o navio e retirá-lo do oceano.
+
+O Titanic foi encontrado em 01 de setembro de 1985 por uma expedição franco-americana. Durante a missão, constataram que o navio havia se partido e que pela sua profundidade seria impossível resgatá-lo do mar.
+
+Uma expedição mais recente, 2022, capturou imagens em alta resolução para auxiliar no estudo da taxa de deteorização do navio, bem como contribuir para uma melhor documentação arqueológica.
+
+O vídeo abaixo é uma das amostras do material elaborado.
+
+{{< video https://youtu.be/x40SAJS2whY >}}
+
+# Titanic e a Ciência de Dados
+
+Em 2012, no centenário do naufrágio, a [kaggle.com](http://kaggle.com/competitions/titanic/) lançou o desafio, ***Titanic: Machine Learning from Disaster***, cujo objetivo é através dos dados reais dos passageiros, desenvolver um modelo de aprendizado de máquina que preveja quais passageiros sobreviveram ao naufrágio do Titanic.
+
+Desde então, a competição se popularizou de tal forma que blábláblá....
+
+## Entendimento do Contexto
+
+Sabemos até aqui que o desastre do Titanic é o mais marcante de todos os tempos.
+
+Propagandas exageradas, negligência empresarial e humana, além das condições climáticas foram fatores que contribuíram para o desastre.
+
+Independente das causas, o fato é que o naufrágio matou 1502 pessoas de um total de 2224 passageiros.
+
+Embora aqueles que escaparam com vida tiveram sua dose de sorte, alguns grupos de pessoas eram mais propensos a escaparem da morte do que outros. Por exemplo, mulheres, crianças e passageiros da 1ª Classe. Assim, nota-se que existe algum padrão que pode ser extraído dos dados brutos.
+
+A partir de agora, iniciaremos a análise de dados para identificar quais variáveis contribuem na probabilidade de sobrevivência. Na sequência, construiremos um modelo de *machine learing* que determine se o passageiro, fornecido como *input*, sobreviveu ou não ao naufrágio.
+
+## Importação dos Dados
+
+Foram disponibilizados dois grupos de dados:
+
+-   *Dataset* de treino (`train.csv`)
+    -   Será utilizado para construção do modelo de *machine learning*;
+    -   Informa se o passageiro sobreviveu ou não;
+    -   Contém diversas variáveis (*features*) como nome, idade, gênero do passageiro e classe do embarque.
+-   *Dataset* de teste (`test.csv`)
+    -   Contém das mesmas variáveis do arquivo (`train.csv`);
+    -   Não informa se o passageiro sobreviveu ou não;
+    -   Será usado como dados que nunca forma vistos pelo modelo.
+
+```{r}
+train <- readr::read_csv(
+    here::here("dados", "train.csv"))
+
+test <- readr::read_csv(
+    here::here("dados", "test.csv"))
+```
+
+### Dados da Amostra Treino (`train.csv`)
+
+```{r}
+head(train, n=10)
+```
+
+#### Quantidade de Observações
+
+```{r}
+nrow(train)
+```
+
+#### Quantidade de Variáveis
+
+```{r}
+ncol(train)
+```
+
+### Dados da Amostra Teste (`test.csv`)
+
+```{r}
+head(test, n=10)
+```
+
+#### Quantidade de Observações
+
+```{r}
+nrow(test)
+```
+
+#### Quantidade de Variáveis
+
+Já é sabido que nesta amostragem não há a variável (`Survived`), uma vez que é o que esperamos que o modelo nos responda.
+
+```{r}
+ncol(test)
+```
+
+### Detalhamento das Variáveis
+
+```{r}
+str(train)
+```
+
++-------------+-----------------------------------------+
+| Variável    | Descrição                               |
++:===========:+:========================================+
+| PassengerId | Número de identificação do passageiro   |
++-------------+-----------------------------------------+
+| Survived    | Variável de indicadora de sobrevivência |
+|             |                                         |
+|             | -   0 = No                              |
+|             |                                         |
+|             | -   1 = Yes                             |
++-------------+-----------------------------------------+
+| Pclass      | Classe do passsageiro                   |
+|             |                                         |
+|             | -   1 = 1st Class                       |
+|             |                                         |
+|             | -   2 = 2nd Class                       |
+|             |                                         |
+|             | -   3 = 3rd Class                       |
++-------------+-----------------------------------------+
+| Name        | Nome do passageiro                      |
++-------------+-----------------------------------------+
+| Sex         | Genero do passageiro                    |
+|             |                                         |
+|             | -   Female                              |
+|             |                                         |
+|             | -   Male                                |
++-------------+-----------------------------------------+
+| Age         | Idade do passageiro                     |
++-------------+-----------------------------------------+
+| SibSp       | Quantidade de irmãos e cônjuges a bordo |
++-------------+-----------------------------------------+
+| Parch       | Quantidade de pais e filhos a bordo     |
++-------------+-----------------------------------------+
+| Ticket      | Número da passagem                      |
++-------------+-----------------------------------------+
+| Fare        | Preço da passagem                       |
++-------------+-----------------------------------------+
+| Cabin       | Número da Cabine do passageiro          |
++-------------+-----------------------------------------+
+| Embarked    | Porto de embarque                       |
+|             |                                         |
+|             | -   C = Cherbourg                       |
+|             |                                         |
+|             | -   Q = Queenstown                      |
+|             |                                         |
+|             | -   S = Southampton                     |
++-------------+-----------------------------------------+
+
+: **Tabela 2: Dicionário de Dados**
+
+## Análise Exploratória dos Dados
+
+```{r}
+summary(train)
+```

@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Majory Melo">
+
+<title>TITANIC: Explorando dados do naufrágio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="index_files/libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<script src="index_files/libs/jquery-1.12.4/jquery.min.js"></script>
+<link href="index_files/libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="index_files/libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="index_files/libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="index_files/libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="index_files/libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="index_files/libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="index_files/libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="index_files/libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="index_files/libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução"><span class="toc-section-number">1</span>  Introdução</a></li>
+  <li><a href="#a-história-do-titanic" id="toc-a-história-do-titanic" class="nav-link" data-scroll-target="#a-história-do-titanic"><span class="toc-section-number">2</span>  A História do Titanic</a>
+  <ul>
+  <li><a href="#tragetória" id="toc-tragetória" class="nav-link" data-scroll-target="#tragetória"><span class="toc-section-number">2.1</span>  Tragetória</a></li>
+  <li><a href="#dados-sobre-passageiros-e-sobreviventes" id="toc-dados-sobre-passageiros-e-sobreviventes" class="nav-link" data-scroll-target="#dados-sobre-passageiros-e-sobreviventes"><span class="toc-section-number">2.2</span>  Dados sobre Passageiros e Sobreviventes</a></li>
+  <li><a href="#legado" id="toc-legado" class="nav-link" data-scroll-target="#legado"><span class="toc-section-number">2.3</span>  Legado</a>
+  <ul class="collapse">
+  <li><a href="#destroços" id="toc-destroços" class="nav-link" data-scroll-target="#destroços"><span class="toc-section-number">2.3.1</span>  Destroços</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#titanic-e-a-ciência-de-dados" id="toc-titanic-e-a-ciência-de-dados" class="nav-link" data-scroll-target="#titanic-e-a-ciência-de-dados"><span class="toc-section-number">3</span>  Titanic e a Ciência de Dados</a>
+  <ul>
+  <li><a href="#entendimento-do-contexto" id="toc-entendimento-do-contexto" class="nav-link" data-scroll-target="#entendimento-do-contexto"><span class="toc-section-number">3.1</span>  Entendimento do Contexto</a></li>
+  <li><a href="#importação-dos-dados" id="toc-importação-dos-dados" class="nav-link" data-scroll-target="#importação-dos-dados"><span class="toc-section-number">3.2</span>  Importação dos Dados</a>
+  <ul class="collapse">
+  <li><a href="#dados-da-amostra-treino-train.csv" id="toc-dados-da-amostra-treino-train.csv" class="nav-link" data-scroll-target="#dados-da-amostra-treino-train.csv"><span class="toc-section-number">3.2.1</span>  Dados da Amostra Treino (<code>train.csv</code>)</a>
+  <ul class="collapse">
+  <li><a href="#quantidade-de-observações" id="toc-quantidade-de-observações" class="nav-link" data-scroll-target="#quantidade-de-observações"><span class="toc-section-number">3.2.1.1</span>  Quantidade de Observações</a></li>
+  <li><a href="#quantidade-de-variáveis" id="toc-quantidade-de-variáveis" class="nav-link" data-scroll-target="#quantidade-de-variáveis"><span class="toc-section-number">3.2.1.2</span>  Quantidade de Variáveis</a></li>
+  </ul></li>
+  <li><a href="#dados-da-amostra-teste-test.csv" id="toc-dados-da-amostra-teste-test.csv" class="nav-link" data-scroll-target="#dados-da-amostra-teste-test.csv"><span class="toc-section-number">3.2.2</span>  Dados da Amostra Teste (<code>test.csv</code>)</a>
+  <ul class="collapse">
+  <li><a href="#quantidade-de-observações-1" id="toc-quantidade-de-observações-1" class="nav-link" data-scroll-target="#quantidade-de-observações-1"><span class="toc-section-number">3.2.2.1</span>  Quantidade de Observações</a></li>
+  <li><a href="#quantidade-de-variáveis-1" id="toc-quantidade-de-variáveis-1" class="nav-link" data-scroll-target="#quantidade-de-variáveis-1"><span class="toc-section-number">3.2.2.2</span>  Quantidade de Variáveis</a></li>
+  </ul></li>
+  <li><a href="#detalhamento-das-variáveis" id="toc-detalhamento-das-variáveis" class="nav-link" data-scroll-target="#detalhamento-das-variáveis"><span class="toc-section-number">3.2.3</span>  Detalhamento das Variáveis</a></li>
+  </ul></li>
+  <li><a href="#análise-exploratória-dos-dados" id="toc-análise-exploratória-dos-dados" class="nav-link" data-scroll-target="#análise-exploratória-dos-dados"><span class="toc-section-number">3.3</span>  Análise Exploratória dos Dados</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TITANIC: Explorando dados do naufrágio</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Majory Melo </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Data de Publicação</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">4 de fevereiro de 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introdução" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introdução</h1>
+<p>O presente documento é parte integrante do trabalho de conclusão do Curso de Verão IME-USP 2022 - Relatórios reprodutíveis com R.</p>
+</section>
+<section id="a-história-do-titanic" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> A História do Titanic</h1>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><a href="https://pt.wikipedia.org/wiki/Ficheiro:RMS_Titanic_3.jpg"><img src="imagens/RMS_Titanic_3.jpg" class="img-fluid figure-img" alt="RMS Titanic partindo de Southampton em 10 de abril de 1912" width="800"></a></p>
+<p></p><figcaption class="figure-caption">RMS Titanic partindo de Southampton em 10 de abril de 1912</figcaption><p></p>
+</figure>
+</div>
+<p>No dia 10 de abril de 1912, o maior transatlântico já construído até então zarpava do porto de Southampton, na Inglaterra, com destino a Nova York, em sua viagem inaugural.</p>
+<p>Na madrugada do dia 14 para o dia 15 de abril, o luxuoso transatlântico colidiu com um iceberg no Atlântico Norte por volta da meia-noite, afundando em menos de três horas. Dos 2.224 passageiros e tripulantes, mais de 1500 pessoas morreram e um pouco mais de 700 conseguiram ser resgatadas pelo navio Carpathia.</p>
+<section id="tragetória" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="tragetória"><span class="header-section-number">2.1</span> Tragetória</h2>
+<p>blábláblá</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(leaflet)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">leaflet</span>()<span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  leaflet<span class="sc">::</span><span class="fu">addProviderTiles</span>(<span class="at">provider =</span> <span class="st">"Esri.WorldStreetMap"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">5.90171</span>, <span class="at">lat=</span><span class="fl">54.61473</span>, <span class="at">popup=</span><span class="st">"Local de Construção - Estaleiro Harland &amp; Wolff"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">1.43570</span>,<span class="at">lat=</span><span class="fl">50.90980</span>, <span class="at">popup=</span><span class="st">"Partida - Southampton"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">1.61151</span>,<span class="at">lat=</span><span class="fl">49.64590</span>, <span class="at">popup=</span><span class="st">"Primeira Parada - Cherbourg"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">8.629906</span>,<span class="at">lat=</span><span class="fl">51.685049</span>, <span class="at">popup=</span><span class="st">"Segunda Parada - Queenstown"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">74.06663</span>,<span class="at">lat=</span><span class="fl">40.62720</span>, <span class="at">popup=</span><span class="st">"Destino - Nova York"</span>)<span class="sc">|&gt;</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">49.946944</span>,<span class="at">lat=</span><span class="fl">41.725556</span>, <span class="at">popup=</span><span class="st">"Local do Naufrágio"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-201b06405b7f66c80f50" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-201b06405b7f66c80f50">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.WorldStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[54.61473,-5.90171,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Local de Construção - Estaleiro Harland & Wolff",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[50.9098,-1.4357,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Partida - Southampton",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.6459,-1.61151,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Primeira Parada - Cherbourg",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[51.685049,-8.629906,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Segunda Parada - Queenstown",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[40.6272,-74.06663,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Destino - Nova York",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[41.725556,-49.946944,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Local do Naufrágio",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[40.6272,54.61473],"lng":[-74.06663,-1.4357]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="dados-sobre-passageiros-e-sobreviventes" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="dados-sobre-passageiros-e-sobreviventes"><span class="header-section-number">2.2</span> Dados sobre Passageiros e Sobreviventes</h2>
+<table class="table">
+<caption><strong>Tabela 1: Classe x Passageiros x Sobreviventes</strong></caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Classe</th>
+<th style="text-align: center;">Passageiros</th>
+<th style="text-align: center;">Sobreviventes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;">325</td>
+<td style="text-align: center;">202</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;">285</td>
+<td style="text-align: center;">118</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;">706</td>
+<td style="text-align: center;">178</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Tripulação</strong></td>
+<td style="text-align: center;">908</td>
+<td style="text-align: center;">212</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Totais</strong></td>
+<td style="text-align: center;">2.224</td>
+<td style="text-align: center;">710</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="legado" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="legado"><span class="header-section-number">2.3</span> Legado</h2>
+<p>De todos os naufrágios conhecidos até hoje, o Titanic é sem dúvidas o mais memorável. Isso se deve a vários fatores como por exemplo, a grande publicidade feita ao seu lançamento, foi considerado o navio inafundável; negligência corporativa, por não terem equipado o navio com coletes e botes salva-vidas suficientes; negligência humana, relatos apontam que o capitão apesar de ter sido avisado sobre o potencial dos icebergs nas águas do norte, manteve o Titanic cruzando o Atlântico a toda velocidade. E por fim, condições climáticas. Pessoas que não se afogaram, morreram de hipotermia nas águas gélidas.</p>
+<p>Como legado, a catástrofe atiçou o fascício das pessoas em querer saber mais detalhes sobre o evento e assim, desde então tem-se livros, documentários, museus e filmes para o deleite desse público.</p>
+<p>Mas o legado mais importante, é a revisão e criação de processos, normas e legislações marítimas.</p>
+<section id="destroços" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="destroços"><span class="header-section-number">2.3.1</span> Destroços</h3>
+<p>Por muitos anos exploradores traçaram planos de encontrar o navio e retirá-lo do oceano.</p>
+<p>O Titanic foi encontrado em 01 de setembro de 1985 por uma expedição franco-americana. Durante a missão, constataram que o navio havia se partido e que pela sua profundidade seria impossível resgatá-lo do mar.</p>
+<p>Uma expedição mais recente, 2022, capturou imagens em alta resolução para auxiliar no estudo da taxa de deteorização do navio, bem como contribuir para uma melhor documentação arqueológica.</p>
+<p>O vídeo abaixo é uma das amostras do material elaborado.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/x40SAJS2whY" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+</section>
+</section>
+<section id="titanic-e-a-ciência-de-dados" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Titanic e a Ciência de Dados</h1>
+<p>Em 2012, no centenário do naufrágio, a <a href="http://kaggle.com/competitions/titanic/">kaggle.com</a> lançou o desafio, <strong><em>Titanic: Machine Learning from Disaster</em></strong>, cujo objetivo é através dos dados reais dos passageiros, desenvolver um modelo de aprendizado de máquina que preveja quais passageiros sobreviveram ao naufrágio do Titanic.</p>
+<p>Desde então, a competição se popularizou de tal forma que blábláblá….</p>
+<section id="entendimento-do-contexto" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="entendimento-do-contexto"><span class="header-section-number">3.1</span> Entendimento do Contexto</h2>
+<p>Sabemos até aqui que o desastre do Titanic é o mais marcante de todos os tempos.</p>
+<p>Propagandas exageradas, negligência empresarial e humana, além das condições climáticas foram fatores que contribuíram para o desastre.</p>
+<p>Independente das causas, o fato é que o naufrágio matou 1502 pessoas de um total de 2224 passageiros.</p>
+<p>Embora aqueles que escaparam com vida tiveram sua dose de sorte, alguns grupos de pessoas eram mais propensos a escaparem da morte do que outros. Por exemplo, mulheres, crianças e passageiros da 1ª Classe. Assim, nota-se que existe algum padrão que pode ser extraído dos dados brutos.</p>
+<p>A partir de agora, iniciaremos a análise de dados para identificar quais variáveis contribuem na probabilidade de sobrevivência. Na sequência, construiremos um modelo de <em>machine learing</em> que determine se o passageiro, fornecido como <em>input</em>, sobreviveu ou não ao naufrágio.</p>
+</section>
+<section id="importação-dos-dados" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="importação-dos-dados"><span class="header-section-number">3.2</span> Importação dos Dados</h2>
+<p>Foram disponibilizados dois grupos de dados:</p>
+<ul>
+<li><em>Dataset</em> de treino (<code>train.csv</code>)
+<ul>
+<li>Será utilizado para construção do modelo de <em>machine learning</em>;</li>
+<li>Informa se o passageiro sobreviveu ou não;</li>
+<li>Contém diversas variáveis (<em>features</em>) como nome, idade, gênero do passageiro e classe do embarque.</li>
+</ul></li>
+<li><em>Dataset</em> de teste (<code>test.csv</code>)
+<ul>
+<li>Contém das mesmas variáveis do arquivo (<code>train.csv</code>);</li>
+<li>Não informa se o passageiro sobreviveu ou não;</li>
+<li>Será usado como dados que nunca forma vistos pelo modelo.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dados"</span>, <span class="st">"train.csv"</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dados"</span>, <span class="st">"test.csv"</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="dados-da-amostra-treino-train.csv" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="dados-da-amostra-treino-train.csv"><span class="header-section-number">3.2.1</span> Dados da Amostra Treino (<code>train.csv</code>)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(train, <span class="at">n=</span><span class="dv">10</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 12
+   PassengerId Survived Pclass Name   Sex     Age SibSp Parch Ticket  Fare Cabin
+         &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1           1        0      3 Braun… male     22     1     0 A/5 2…  7.25 &lt;NA&gt; 
+ 2           2        1      1 Cumin… fema…    38     1     0 PC 17… 71.3  C85  
+ 3           3        1      3 Heikk… fema…    26     0     0 STON/…  7.92 &lt;NA&gt; 
+ 4           4        1      1 Futre… fema…    35     1     0 113803 53.1  C123 
+ 5           5        0      3 Allen… male     35     0     0 373450  8.05 &lt;NA&gt; 
+ 6           6        0      3 Moran… male     NA     0     0 330877  8.46 &lt;NA&gt; 
+ 7           7        0      1 McCar… male     54     0     0 17463  51.9  E46  
+ 8           8        0      3 Palss… male      2     3     1 349909 21.1  &lt;NA&gt; 
+ 9           9        1      3 Johns… fema…    27     0     2 347742 11.1  &lt;NA&gt; 
+10          10        1      2 Nasse… fema…    14     1     0 237736 30.1  &lt;NA&gt; 
+# … with 1 more variable: Embarked &lt;chr&gt;</code></pre>
+</div>
+</div>
+<section id="quantidade-de-observações" class="level4" data-number="3.2.1.1">
+<h4 data-number="3.2.1.1" class="anchored" data-anchor-id="quantidade-de-observações"><span class="header-section-number">3.2.1.1</span> Quantidade de Observações</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(train)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 891</code></pre>
+</div>
+</div>
+</section>
+<section id="quantidade-de-variáveis" class="level4" data-number="3.2.1.2">
+<h4 data-number="3.2.1.2" class="anchored" data-anchor-id="quantidade-de-variáveis"><span class="header-section-number">3.2.1.2</span> Quantidade de Variáveis</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(train)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="dados-da-amostra-teste-test.csv" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="dados-da-amostra-teste-test.csv"><span class="header-section-number">3.2.2</span> Dados da Amostra Teste (<code>test.csv</code>)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(test, <span class="at">n=</span><span class="dv">10</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 11
+   PassengerId Pclass Name    Sex     Age SibSp Parch Ticket  Fare Cabin Embar…¹
+         &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
+ 1         892      3 Kelly,… male   34.5     0     0 330911  7.83 &lt;NA&gt;  Q      
+ 2         893      3 Wilkes… fema…  47       1     0 363272  7    &lt;NA&gt;  S      
+ 3         894      2 Myles,… male   62       0     0 240276  9.69 &lt;NA&gt;  Q      
+ 4         895      3 Wirz, … male   27       0     0 315154  8.66 &lt;NA&gt;  S      
+ 5         896      3 Hirvon… fema…  22       1     1 31012… 12.3  &lt;NA&gt;  S      
+ 6         897      3 Svenss… male   14       0     0 7538    9.22 &lt;NA&gt;  S      
+ 7         898      3 Connol… fema…  30       0     0 330972  7.63 &lt;NA&gt;  Q      
+ 8         899      2 Caldwe… male   26       1     1 248738 29    &lt;NA&gt;  S      
+ 9         900      3 Abrahi… fema…  18       0     0 2657    7.23 &lt;NA&gt;  C      
+10         901      3 Davies… male   21       2     0 A/4 4… 24.2  &lt;NA&gt;  S      
+# … with abbreviated variable name ¹​Embarked</code></pre>
+</div>
+</div>
+<section id="quantidade-de-observações-1" class="level4" data-number="3.2.2.1">
+<h4 data-number="3.2.2.1" class="anchored" data-anchor-id="quantidade-de-observações-1"><span class="header-section-number">3.2.2.1</span> Quantidade de Observações</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(test)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 418</code></pre>
+</div>
+</div>
+</section>
+<section id="quantidade-de-variáveis-1" class="level4" data-number="3.2.2.2">
+<h4 data-number="3.2.2.2" class="anchored" data-anchor-id="quantidade-de-variáveis-1"><span class="header-section-number">3.2.2.2</span> Quantidade de Variáveis</h4>
+<p>Já é sabido que nesta amostragem não há a variável (<code>Survived</code>), uma vez que é o que esperamos que o modelo nos responda.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(test)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="detalhamento-das-variáveis" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="detalhamento-das-variáveis"><span class="header-section-number">3.2.3</span> Detalhamento das Variáveis</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(train)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [891 × 12] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ PassengerId: num [1:891] 1 2 3 4 5 6 7 8 9 10 ...
+ $ Survived   : num [1:891] 0 1 1 1 0 0 0 0 1 1 ...
+ $ Pclass     : num [1:891] 3 1 3 1 3 3 1 3 3 2 ...
+ $ Name       : chr [1:891] "Braund, Mr. Owen Harris" "Cumings, Mrs. John Bradley (Florence Briggs Thayer)" "Heikkinen, Miss. Laina" "Futrelle, Mrs. Jacques Heath (Lily May Peel)" ...
+ $ Sex        : chr [1:891] "male" "female" "female" "female" ...
+ $ Age        : num [1:891] 22 38 26 35 35 NA 54 2 27 14 ...
+ $ SibSp      : num [1:891] 1 1 0 1 0 0 0 3 0 1 ...
+ $ Parch      : num [1:891] 0 0 0 0 0 0 0 1 2 0 ...
+ $ Ticket     : chr [1:891] "A/5 21171" "PC 17599" "STON/O2. 3101282" "113803" ...
+ $ Fare       : num [1:891] 7.25 71.28 7.92 53.1 8.05 ...
+ $ Cabin      : chr [1:891] NA "C85" NA "C123" ...
+ $ Embarked   : chr [1:891] "S" "C" "S" "S" ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   PassengerId = col_double(),
+  ..   Survived = col_double(),
+  ..   Pclass = col_double(),
+  ..   Name = col_character(),
+  ..   Sex = col_character(),
+  ..   Age = col_double(),
+  ..   SibSp = col_double(),
+  ..   Parch = col_double(),
+  ..   Ticket = col_character(),
+  ..   Fare = col_double(),
+  ..   Cabin = col_character(),
+  ..   Embarked = col_character()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+</div>
+<table class="table">
+<caption><strong>Tabela 2: Dicionário de Dados</strong></caption>
+<colgroup>
+<col style="width: 40%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Variável</th>
+<th style="text-align: left;">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">PassengerId</td>
+<td style="text-align: left;">Número de identificação do passageiro</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Survived</td>
+<td style="text-align: left;"><p>Variável de indicadora de sobrevivência</p>
+<ul>
+<li><p>0 = No</p></li>
+<li><p>1 = Yes</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Pclass</td>
+<td style="text-align: left;"><p>Classe do passsageiro</p>
+<ul>
+<li><p>1 = 1st Class</p></li>
+<li><p>2 = 2nd Class</p></li>
+<li><p>3 = 3rd Class</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Name</td>
+<td style="text-align: left;">Nome do passageiro</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Sex</td>
+<td style="text-align: left;"><p>Genero do passageiro</p>
+<ul>
+<li><p>Female</p></li>
+<li><p>Male</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Age</td>
+<td style="text-align: left;">Idade do passageiro</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">SibSp</td>
+<td style="text-align: left;">Quantidade de irmãos e cônjuges a bordo</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Parch</td>
+<td style="text-align: left;">Quantidade de pais e filhos a bordo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Ticket</td>
+<td style="text-align: left;">Número da passagem</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Fare</td>
+<td style="text-align: left;">Preço da passagem</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Cabin</td>
+<td style="text-align: left;">Número da Cabine do passageiro</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Embarked</td>
+<td style="text-align: left;"><p>Porto de embarque</p>
+<ul>
+<li><p>C = Cherbourg</p></li>
+<li><p>Q = Queenstown</p></li>
+<li><p>S = Southampton</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="análise-exploratória-dos-dados" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="análise-exploratória-dos-dados"><span class="header-section-number">3.3</span> Análise Exploratória dos Dados</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(train)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  PassengerId       Survived          Pclass          Name          
+ Min.   :  1.0   Min.   :0.0000   Min.   :1.000   Length:891        
+ 1st Qu.:223.5   1st Qu.:0.0000   1st Qu.:2.000   Class :character  
+ Median :446.0   Median :0.0000   Median :3.000   Mode  :character  
+ Mean   :446.0   Mean   :0.3838   Mean   :2.309                     
+ 3rd Qu.:668.5   3rd Qu.:1.0000   3rd Qu.:3.000                     
+ Max.   :891.0   Max.   :1.0000   Max.   :3.000                     
+                                                                    
+     Sex                 Age            SibSp           Parch       
+ Length:891         Min.   : 0.42   Min.   :0.000   Min.   :0.0000  
+ Class :character   1st Qu.:20.12   1st Qu.:0.000   1st Qu.:0.0000  
+ Mode  :character   Median :28.00   Median :0.000   Median :0.0000  
+                    Mean   :29.70   Mean   :0.523   Mean   :0.3816  
+                    3rd Qu.:38.00   3rd Qu.:1.000   3rd Qu.:0.0000  
+                    Max.   :80.00   Max.   :8.000   Max.   :6.0000  
+                    NA's   :177                                     
+    Ticket               Fare           Cabin             Embarked        
+ Length:891         Min.   :  0.00   Length:891         Length:891        
+ Class :character   1st Qu.:  7.91   Class :character   Class :character  
+ Mode  :character   Median : 14.45   Mode  :character   Mode  :character  
+                    Mean   : 32.20                                        
+                    3rd Qu.: 31.00                                        
+                    Max.   :512.33                                        
+                                                                          </code></pre>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
