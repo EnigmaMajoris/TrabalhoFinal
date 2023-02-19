@@ -84,6 +84,26 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -137,20 +157,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#entendimento-do-contexto" id="toc-entendimento-do-contexto" class="nav-link" data-scroll-target="#entendimento-do-contexto"><span class="toc-section-number">3.1</span>  Entendimento do Contexto</a></li>
   <li><a href="#importação-dos-dados" id="toc-importação-dos-dados" class="nav-link" data-scroll-target="#importação-dos-dados"><span class="toc-section-number">3.2</span>  Importação dos Dados</a>
   <ul class="collapse">
-  <li><a href="#dados-da-amostra-treino-train.csv" id="toc-dados-da-amostra-treino-train.csv" class="nav-link" data-scroll-target="#dados-da-amostra-treino-train.csv"><span class="toc-section-number">3.2.1</span>  Dados da Amostra Treino (<code>train.csv</code>)</a>
+  <li><a href="#dados-da-amostra-treino" id="toc-dados-da-amostra-treino" class="nav-link" data-scroll-target="#dados-da-amostra-treino"><span class="toc-section-number">3.2.1</span>  Dados da Amostra Treino</a></li>
+  <li><a href="#dados-da-amostra-teste" id="toc-dados-da-amostra-teste" class="nav-link" data-scroll-target="#dados-da-amostra-teste"><span class="toc-section-number">3.2.2</span>  Dados da Amostra Teste</a></li>
+  <li><a href="#unificação-da-base-de-dados" id="toc-unificação-da-base-de-dados" class="nav-link" data-scroll-target="#unificação-da-base-de-dados"><span class="toc-section-number">3.2.3</span>  Unificação da Base de Dados</a></li>
+  <li><a href="#dicionário-de-dados" id="toc-dicionário-de-dados" class="nav-link" data-scroll-target="#dicionário-de-dados"><span class="toc-section-number">3.2.4</span>  Dicionário de Dados</a></li>
+  </ul></li>
+  <li><a href="#análise-exploratória" id="toc-análise-exploratória" class="nav-link" data-scroll-target="#análise-exploratória"><span class="toc-section-number">3.3</span>  Análise Exploratória</a>
   <ul class="collapse">
-  <li><a href="#quantidade-de-observações" id="toc-quantidade-de-observações" class="nav-link" data-scroll-target="#quantidade-de-observações"><span class="toc-section-number">3.2.1.1</span>  Quantidade de Observações</a></li>
-  <li><a href="#quantidade-de-variáveis" id="toc-quantidade-de-variáveis" class="nav-link" data-scroll-target="#quantidade-de-variáveis"><span class="toc-section-number">3.2.1.2</span>  Quantidade de Variáveis</a></li>
-  </ul></li>
-  <li><a href="#dados-da-amostra-teste-test.csv" id="toc-dados-da-amostra-teste-test.csv" class="nav-link" data-scroll-target="#dados-da-amostra-teste-test.csv"><span class="toc-section-number">3.2.2</span>  Dados da Amostra Teste (<code>test.csv</code>)</a>
+  <li><a href="#tratamento-dos-dados" id="toc-tratamento-dos-dados" class="nav-link" data-scroll-target="#tratamento-dos-dados"><span class="toc-section-number">3.3.1</span>  Tratamento dos Dados</a>
   <ul class="collapse">
-  <li><a href="#quantidade-de-observações-1" id="toc-quantidade-de-observações-1" class="nav-link" data-scroll-target="#quantidade-de-observações-1"><span class="toc-section-number">3.2.2.1</span>  Quantidade de Observações</a></li>
-  <li><a href="#quantidade-de-variáveis-1" id="toc-quantidade-de-variáveis-1" class="nav-link" data-scroll-target="#quantidade-de-variáveis-1"><span class="toc-section-number">3.2.2.2</span>  Quantidade de Variáveis</a></li>
+  <li><a href="#tipo-de-variável" id="toc-tipo-de-variável" class="nav-link" data-scroll-target="#tipo-de-variável"><span class="toc-section-number">3.3.1.1</span>  Tipo de Variável</a></li>
+  <li><a href="#valores-vazios" id="toc-valores-vazios" class="nav-link" data-scroll-target="#valores-vazios"><span class="toc-section-number">3.3.1.2</span>  Valores Vazios</a></li>
+  <li><a href="#criação-de-novas-variáveis" id="toc-criação-de-novas-variáveis" class="nav-link" data-scroll-target="#criação-de-novas-variáveis"><span class="toc-section-number">3.3.1.3</span>  Criação de Novas Variáveis</a></li>
   </ul></li>
-  <li><a href="#detalhamento-das-variáveis" id="toc-detalhamento-das-variáveis" class="nav-link" data-scroll-target="#detalhamento-das-variáveis"><span class="toc-section-number">3.2.3</span>  Detalhamento das Variáveis</a></li>
+  <li><a href="#visualização-exploratória-da-distribuição-dos-sobreviventes" id="toc-visualização-exploratória-da-distribuição-dos-sobreviventes" class="nav-link" data-scroll-target="#visualização-exploratória-da-distribuição-dos-sobreviventes"><span class="toc-section-number">3.3.2</span>  Visualização Exploratória da Distribuição dos Sobreviventes</a></li>
   </ul></li>
-  <li><a href="#análise-exploratória-dos-dados" id="toc-análise-exploratória-dos-dados" class="nav-link" data-scroll-target="#análise-exploratória-dos-dados"><span class="toc-section-number">3.3</span>  Análise Exploratória dos Dados</a></li>
+  <li><a href="#preparação-dos-dados-para-o-modelo-de-machine-learning" id="toc-preparação-dos-dados-para-o-modelo-de-machine-learning" class="nav-link" data-scroll-target="#preparação-dos-dados-para-o-modelo-de-machine-learning"><span class="toc-section-number">3.4</span>  Preparação dos Dados para o Modelo de Machine Learning</a>
+  <ul class="collapse">
+  <li><a href="#seleção-das-variáveis" id="toc-seleção-das-variáveis" class="nav-link" data-scroll-target="#seleção-das-variáveis"><span class="toc-section-number">3.4.1</span>  Seleção das variáveis</a></li>
+  <li><a href="#conversão-de-variáveis-em-dummies" id="toc-conversão-de-variáveis-em-dummies" class="nav-link" data-scroll-target="#conversão-de-variáveis-em-dummies"><span class="toc-section-number">3.4.2</span>  Conversão de Variáveis em <em>dummies</em></a></li>
+  <li><a href="#recuperando-os-banco-de-dados" id="toc-recuperando-os-banco-de-dados" class="nav-link" data-scroll-target="#recuperando-os-banco-de-dados"><span class="toc-section-number">3.4.3</span>  Recuperando os Banco de Dados</a></li>
   </ul></li>
+  <li><a href="#contrução-do-modelo-de-machine-learning" id="toc-contrução-do-modelo-de-machine-learning" class="nav-link" data-scroll-target="#contrução-do-modelo-de-machine-learning"><span class="toc-section-number">3.5</span>  Contrução do Modelo de <em>Machine Learning</em></a>
+  <ul class="collapse">
+  <li><a href="#random-forest" id="toc-random-forest" class="nav-link" data-scroll-target="#random-forest"><span class="toc-section-number">3.5.1</span>  Random Forest</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#referências-bibliográficas" id="toc-referências-bibliográficas" class="nav-link" data-scroll-target="#referências-bibliográficas"><span class="toc-section-number">4</span>  Referências Bibliográficas</a></li>
   </ul>
 </nav>
 </div>
@@ -177,7 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Data de Publicação</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">4 de fevereiro de 2023</p>
+      <p class="date">18 de fevereiro de 2023</p>
     </div>
   </div>
   
@@ -189,7 +222,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="introdução" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introdução</h1>
-<p>O presente documento é parte integrante do trabalho de conclusão do Curso de Verão IME-USP 2022 - Relatórios reprodutíveis com R.</p>
+<p>O presente documento é o trabalho de conclusão do Curso de Verão IME-USP 2022 - Relatórios reprodutíveis com R, e tem por objetivo demostrar os conceitos e técnicas abordadas ao longo do curso para a elaboração de relatórios reprodutíveis em R.</p>
+<p>O tema escolhido para estruturar o relatório é a construção de um modelo de <em>machine learning</em> com base na análise de dados dos passageiros do transatlântico Titanic, que afundou em sua viagem inaugural em 1912.</p>
+<p>Para isso, o documento se divide em 03 partes:</p>
+<ol type="1">
+<li><p>Introdução</p>
+<ul>
+<li>Apresentação da justificativa e objetivo do relatório.</li>
+</ul></li>
+<li><p>História do Titanic</p>
+<ul>
+<li>Exposição das informações sobre a construção do navio, o desastre e a relevância do evento nos dias atuais.</li>
+</ul></li>
+<li><p>Titanic e a Ciência de Dados</p>
+<ul>
+<li>Detalhamento dos procedimentos para realização da análise de dados dos passageiros e construção do modelo de predição, bem como a avaliação dos resultados obtidos.</li>
+</ul></li>
+<li><p>Referencias bibliográficas</p>
+<ul>
+<li>Relação da fonte de pesquisa que embasou este documento.</li>
+</ul></li>
+</ol>
 </section>
 <section id="a-história-do-titanic" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> A História do Titanic</h1>
@@ -199,24 +252,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p></p><figcaption class="figure-caption">RMS Titanic partindo de Southampton em 10 de abril de 1912</figcaption><p></p>
 </figure>
 </div>
-<p>No dia 10 de abril de 1912, o maior transatlântico já construído até então zarpava do porto de Southampton, na Inglaterra, com destino a Nova York, em sua viagem inaugural.</p>
-<p>Na madrugada do dia 14 para o dia 15 de abril, o luxuoso transatlântico colidiu com um iceberg no Atlântico Norte por volta da meia-noite, afundando em menos de três horas. Dos 2.224 passageiros e tripulantes, mais de 1500 pessoas morreram e um pouco mais de 700 conseguiram ser resgatadas pelo navio Carpathia.</p>
+<p>No dia 10 de abril de 1912, o maior transatlântico já construído até então zarpava do porto de Southampton, na Inglaterra, com destino a Nova York.</p>
+<p>Na madruagada do dia 15 de abril, o luxuoso transatlântico colidiu com um iceberg no Atlântico Norte , afundando em menos de três horas. Dos 2.224 passageiros e tripulantes, mais de 1500 pessoas morreram e um pouco mais de 700 conseguiram ser resgatadas pelo navio Carpathia.</p>
 <section id="tragetória" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="tragetória"><span class="header-section-number">2.1</span> Tragetória</h2>
-<p>blábláblá</p>
+<p>Em Março de 1909 as empresas Harland and Wolff e White Star Line iniciaram a construção do Titanic em Belfast na Irlanda.</p>
+<p>Após 03 anos de construção, no dia 10 de abril de 1912 o Titanic ficou pronto para sua viagem inaugural, zarpando do porto de Southampton, Inglaterra.</p>
+<p>Ainda no dia 10 ele chega ao porto de Cherbourg na França e no dia 11 ancora em Queenstown, Irlanda de onde seguiu viagem rumo aos Estados Unidos.</p>
+<p>No dia 15 de abril, após colidir num iceberg o Tinatic afunda a 500km da costa do Canadá.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(leaflet)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">leaflet</span>()<span class="sc">|&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  leaflet<span class="sc">::</span><span class="fu">addProviderTiles</span>(<span class="at">provider =</span> <span class="st">"Esri.WorldStreetMap"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">5.90171</span>, <span class="at">lat=</span><span class="fl">54.61473</span>, <span class="at">popup=</span><span class="st">"Local de Construção - Estaleiro Harland &amp; Wolff"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">1.43570</span>,<span class="at">lat=</span><span class="fl">50.90980</span>, <span class="at">popup=</span><span class="st">"Partida - Southampton"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">1.61151</span>,<span class="at">lat=</span><span class="fl">49.64590</span>, <span class="at">popup=</span><span class="st">"Primeira Parada - Cherbourg"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">8.629906</span>,<span class="at">lat=</span><span class="fl">51.685049</span>, <span class="at">popup=</span><span class="st">"Segunda Parada - Queenstown"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">74.06663</span>,<span class="at">lat=</span><span class="fl">40.62720</span>, <span class="at">popup=</span><span class="st">"Destino - Nova York"</span>)<span class="sc">|&gt;</span> </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">49.946944</span>,<span class="at">lat=</span><span class="fl">41.725556</span>, <span class="at">popup=</span><span class="st">"Local do Naufrágio"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">leaflet</span>()<span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  leaflet<span class="sc">::</span><span class="fu">addProviderTiles</span>(<span class="at">provider =</span> <span class="st">"Esri.WorldStreetMap"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">5.90171</span>, <span class="at">lat=</span><span class="fl">54.61473</span>, <span class="at">popup=</span><span class="st">"Local de Construção - Estaleiro Harland &amp; Wolff"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">1.43570</span>,<span class="at">lat=</span><span class="fl">50.90980</span>, <span class="at">popup=</span><span class="st">"Partida - Southampton"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">1.61151</span>,<span class="at">lat=</span><span class="fl">49.64590</span>, <span class="at">popup=</span><span class="st">"Primeira Parada - Cherbourg"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">8.629906</span>,<span class="at">lat=</span><span class="fl">51.685049</span>, <span class="at">popup=</span><span class="st">"Segunda Parada - Queenstown"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">74.06663</span>,<span class="at">lat=</span><span class="fl">40.62720</span>, <span class="at">popup=</span><span class="st">"Destino - Nova York"</span>)<span class="sc">|&gt;</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">lng=</span><span class="sc">-</span><span class="fl">49.946944</span>,<span class="at">lat=</span><span class="fl">41.725556</span>, <span class="at">popup=</span><span class="st">"Local do Naufrágio"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-201b06405b7f66c80f50" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-201b06405b7f66c80f50">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.WorldStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[54.61473,-5.90171,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Local de Construção - Estaleiro Harland & Wolff",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[50.9098,-1.4357,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Partida - Southampton",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.6459,-1.61151,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Primeira Parada - Cherbourg",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[51.685049,-8.629906,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Segunda Parada - Queenstown",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[40.6272,-74.06663,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Destino - Nova York",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[41.725556,-49.946944,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Local do Naufrágio",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[40.6272,54.61473],"lng":[-74.06663,-1.4357]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-010ef62df01b031a887c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-010ef62df01b031a887c">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.WorldStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[54.61473,-5.90171,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Local de Construção - Estaleiro Harland & Wolff",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[50.9098,-1.4357,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Partida - Southampton",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[49.6459,-1.61151,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Primeira Parada - Cherbourg",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[51.685049,-8.629906,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Segunda Parada - Queenstown",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[40.6272,-74.06663,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Destino - Nova York",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMarkers","args":[41.725556,-49.946944,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Local do Naufrágio",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[40.6272,54.61473],"lng":[-74.06663,-1.4357]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -278,274 +336,1335 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="titanic-e-a-ciência-de-dados" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Titanic e a Ciência de Dados</h1>
 <p>Em 2012, no centenário do naufrágio, a <a href="http://kaggle.com/competitions/titanic/">kaggle.com</a> lançou o desafio, <strong><em>Titanic: Machine Learning from Disaster</em></strong>, cujo objetivo é através dos dados reais dos passageiros, desenvolver um modelo de aprendizado de máquina que preveja quais passageiros sobreviveram ao naufrágio do Titanic.</p>
-<p>Desde então, a competição se popularizou de tal forma que blábláblá….</p>
+<p>Desde então, a competição se popularizou e é amplamente conhecida pelos profissionais da área de ciência de dados.</p>
 <section id="entendimento-do-contexto" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="entendimento-do-contexto"><span class="header-section-number">3.1</span> Entendimento do Contexto</h2>
-<p>Sabemos até aqui que o desastre do Titanic é o mais marcante de todos os tempos.</p>
+<p>Sem dúvidas o desastre do Titanic é o mais marcante de todos os tempos.</p>
 <p>Propagandas exageradas, negligência empresarial e humana, além das condições climáticas foram fatores que contribuíram para o desastre.</p>
 <p>Independente das causas, o fato é que o naufrágio matou 1502 pessoas de um total de 2224 passageiros.</p>
-<p>Embora aqueles que escaparam com vida tiveram sua dose de sorte, alguns grupos de pessoas eram mais propensos a escaparem da morte do que outros. Por exemplo, mulheres, crianças e passageiros da 1ª Classe. Assim, nota-se que existe algum padrão que pode ser extraído dos dados brutos.</p>
-<p>A partir de agora, iniciaremos a análise de dados para identificar quais variáveis contribuem na probabilidade de sobrevivência. Na sequência, construiremos um modelo de <em>machine learing</em> que determine se o passageiro, fornecido como <em>input</em>, sobreviveu ou não ao naufrágio.</p>
+<p>Embora aqueles que escaparam com vida tiveram sua dose de sorte, alguns grupos de pessoas eram mais propensos a sobreviverem do que outros. Por exemplo, mulheres, crianças e passageiros da 1ª Classe. Assim, nota-se que existe algum padrão que pode ser extraído dos dados brutos.</p>
+<p>A partir da análise de dados dos passageiros e etendimento do contexto, será avaliado quais variáveis podem ter contribuido na probabilidade de sobrevivência. Na sequência, será construído um modelo de <em>machine learing</em> que determine se o passageiro, fornecido como <em>input</em>, sobreviveu ou não ao naufrágio.</p>
 </section>
 <section id="importação-dos-dados" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="importação-dos-dados"><span class="header-section-number">3.2</span> Importação dos Dados</h2>
 <p>Foram disponibilizados dois grupos de dados:</p>
 <ul>
-<li><em>Dataset</em> de treino (<code>train.csv</code>)
+<li><p><em>Dataset</em> de treino <code>train.csv</code></p>
 <ul>
 <li>Será utilizado para construção do modelo de <em>machine learning</em>;</li>
 <li>Informa se o passageiro sobreviveu ou não;</li>
 <li>Contém diversas variáveis (<em>features</em>) como nome, idade, gênero do passageiro e classe do embarque.</li>
 </ul></li>
-<li><em>Dataset</em> de teste (<code>test.csv</code>)
+<li><p><em>Dataset</em> de teste <code>test.csv</code></p>
 <ul>
-<li>Contém das mesmas variáveis do arquivo (<code>train.csv</code>);</li>
+<li>Contém das mesmas variáveis do arquivo <code>train.csv</code>;</li>
 <li>Não informa se o passageiro sobreviveu ou não;</li>
 <li>Será usado como dados que nunca forma vistos pelo modelo.</li>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dados"</span>, <span class="st">"train.csv"</span>))</span>
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    train <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dados"</span>, <span class="st">"train.csv"</span>))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dados"</span>, <span class="st">"test.csv"</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    test <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dados"</span>, <span class="st">"test.csv"</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<section id="dados-da-amostra-treino-train.csv" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="dados-da-amostra-treino-train.csv"><span class="header-section-number">3.2.1</span> Dados da Amostra Treino (<code>train.csv</code>)</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(train, <span class="at">n=</span><span class="dv">10</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 12
-   PassengerId Survived Pclass Name   Sex     Age SibSp Parch Ticket  Fare Cabin
-         &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;
- 1           1        0      3 Braun… male     22     1     0 A/5 2…  7.25 &lt;NA&gt; 
- 2           2        1      1 Cumin… fema…    38     1     0 PC 17… 71.3  C85  
- 3           3        1      3 Heikk… fema…    26     0     0 STON/…  7.92 &lt;NA&gt; 
- 4           4        1      1 Futre… fema…    35     1     0 113803 53.1  C123 
- 5           5        0      3 Allen… male     35     0     0 373450  8.05 &lt;NA&gt; 
- 6           6        0      3 Moran… male     NA     0     0 330877  8.46 &lt;NA&gt; 
- 7           7        0      1 McCar… male     54     0     0 17463  51.9  E46  
- 8           8        0      3 Palss… male      2     3     1 349909 21.1  &lt;NA&gt; 
- 9           9        1      3 Johns… fema…    27     0     2 347742 11.1  &lt;NA&gt; 
-10          10        1      2 Nasse… fema…    14     1     0 237736 30.1  &lt;NA&gt; 
-# … with 1 more variable: Embarked &lt;chr&gt;</code></pre>
-</div>
-</div>
-<section id="quantidade-de-observações" class="level4" data-number="3.2.1.1">
-<h4 data-number="3.2.1.1" class="anchored" data-anchor-id="quantidade-de-observações"><span class="header-section-number">3.2.1.1</span> Quantidade de Observações</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(train)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 891</code></pre>
-</div>
-</div>
+<section id="dados-da-amostra-treino" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="dados-da-amostra-treino"><span class="header-section-number">3.2.1</span> Dados da Amostra Treino</h3>
+Exibindo dados das 4 primeiras amostras do banco de dados <code>train.csv</code>
+
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+PassengerId
+</th>
+<th style="text-align:right;">
+Survived
+</th>
+<th style="text-align:right;">
+Pclass
+</th>
+<th style="text-align:right;">
+Name
+</th>
+<th style="text-align:right;">
+Sex
+</th>
+<th style="text-align:right;">
+Age
+</th>
+<th style="text-align:right;">
+SibSp
+</th>
+<th style="text-align:right;">
+Parch
+</th>
+<th style="text-align:right;">
+Ticket
+</th>
+<th style="text-align:right;">
+Fare
+</th>
+<th style="text-align:right;">
+Cabin
+</th>
+<th style="text-align:right;">
+Embarked
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+Braund, Mr.&nbsp;Owen Harris
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+A/5 21171
+</td>
+<td style="text-align:right;">
+7.2500
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+S
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+Cumings, Mrs.&nbsp;John Bradley (Florence Briggs Thayer)
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+PC 17599
+</td>
+<td style="text-align:right;">
+71.2833
+</td>
+<td style="text-align:right;">
+C85
+</td>
+<td style="text-align:right;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+Heikkinen, Miss. Laina
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+STON/O2. 3101282
+</td>
+<td style="text-align:right;">
+7.9250
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+S
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+Futrelle, Mrs.&nbsp;Jacques Heath (Lily May Peel)
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+113803
+</td>
+<td style="text-align:right;">
+53.1000
+</td>
+<td style="text-align:right;">
+C123
+</td>
+<td style="text-align:right;">
+S
+</td>
+</tr>
+</tbody>
+
+</table>
+<ul>
+<li><strong>Quantidade de Observações (Linhas):</strong> <em>891</em></li>
+<li><strong>Quantidade de Variáveis (Colunas):</strong> <em>12</em></li>
+</ul>
 </section>
-<section id="quantidade-de-variáveis" class="level4" data-number="3.2.1.2">
-<h4 data-number="3.2.1.2" class="anchored" data-anchor-id="quantidade-de-variáveis"><span class="header-section-number">3.2.1.2</span> Quantidade de Variáveis</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(train)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 12</code></pre>
-</div>
-</div>
+<section id="dados-da-amostra-teste" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="dados-da-amostra-teste"><span class="header-section-number">3.2.2</span> Dados da Amostra Teste</h3>
+Exibindo dados das 4 primeiras amostras do banco de dados <code>test.csv</code>
+
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+PassengerId
+</th>
+<th style="text-align:right;">
+Pclass
+</th>
+<th style="text-align:right;">
+Name
+</th>
+<th style="text-align:right;">
+Sex
+</th>
+<th style="text-align:right;">
+Age
+</th>
+<th style="text-align:right;">
+SibSp
+</th>
+<th style="text-align:right;">
+Parch
+</th>
+<th style="text-align:right;">
+Ticket
+</th>
+<th style="text-align:right;">
+Fare
+</th>
+<th style="text-align:right;">
+Cabin
+</th>
+<th style="text-align:right;">
+Embarked
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+892
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+Kelly, Mr.&nbsp;James
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+34.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+330911
+</td>
+<td style="text-align:right;">
+7.8292
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+Q
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+893
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+Wilkes, Mrs.&nbsp;James (Ellen Needs)
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+47.0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+363272
+</td>
+<td style="text-align:right;">
+7.0000
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+S
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+894
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+Myles, Mr.&nbsp;Thomas Francis
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+62.0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+240276
+</td>
+<td style="text-align:right;">
+9.6875
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+Q
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+895
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+Wirz, Mr.&nbsp;Albert
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+27.0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+315154
+</td>
+<td style="text-align:right;">
+8.6625
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+S
+</td>
+</tr>
+</tbody>
+
+</table>
+<ul>
+<li><strong>Quantidade de Observações (Linhas):</strong> <em>418</em></li>
+<li><strong>Quantidade de Variáveis (Colunas):</strong> <em>11</em></li>
+</ul>
 </section>
+<section id="unificação-da-base-de-dados" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="unificação-da-base-de-dados"><span class="header-section-number">3.2.3</span> Unificação da Base de Dados</h3>
+<p>Unificar a base de dados <code>train.csv</code> com a base de dados <code>test.csv</code>, para ser usado na construção do modelo e facilitar o tratamento das variáveis.</p>
+<p>Para isso, é preciso tratar a base da dados <code>test.csv</code> para que tenha-se a coluna <code>Survived</code>e assim fique com a mesmas colunas que a base de dados <code>train.csv</code></p>
+Exibindo dados das 4 primeiras amostras do banco de dados <code>fulldados</code>
+
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:right;">
+PassengerId
+</th>
+<th style="text-align:right;">
+Survived
+</th>
+<th style="text-align:right;">
+Pclass
+</th>
+<th style="text-align:right;">
+Name
+</th>
+<th style="text-align:right;">
+Sex
+</th>
+<th style="text-align:right;">
+Age
+</th>
+<th style="text-align:right;">
+SibSp
+</th>
+<th style="text-align:right;">
+Parch
+</th>
+<th style="text-align:right;">
+Ticket
+</th>
+<th style="text-align:right;">
+Fare
+</th>
+<th style="text-align:right;">
+Cabin
+</th>
+<th style="text-align:right;">
+Embarked
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+Braund, Mr.&nbsp;Owen Harris
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+A/5 21171
+</td>
+<td style="text-align:right;">
+7.2500
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+S
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+Cumings, Mrs.&nbsp;John Bradley (Florence Briggs Thayer)
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+PC 17599
+</td>
+<td style="text-align:right;">
+71.2833
+</td>
+<td style="text-align:right;">
+C85
+</td>
+<td style="text-align:right;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+Heikkinen, Miss. Laina
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+STON/O2. 3101282
+</td>
+<td style="text-align:right;">
+7.9250
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+S
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+Futrelle, Mrs.&nbsp;Jacques Heath (Lily May Peel)
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+113803
+</td>
+<td style="text-align:right;">
+53.1000
+</td>
+<td style="text-align:right;">
+C123
+</td>
+<td style="text-align:right;">
+S
+</td>
+</tr>
+</tbody>
+
+</table>
+<ul>
+<li><strong>Quantidade de Observações (Linhas):</strong> <em>1309</em></li>
+<li><strong>Quantidade de Variáveis (Colunas):</strong> <em>12</em></li>
+</ul>
 </section>
-<section id="dados-da-amostra-teste-test.csv" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="dados-da-amostra-teste-test.csv"><span class="header-section-number">3.2.2</span> Dados da Amostra Teste (<code>test.csv</code>)</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(test, <span class="at">n=</span><span class="dv">10</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 11
-   PassengerId Pclass Name    Sex     Age SibSp Parch Ticket  Fare Cabin Embar…¹
-         &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
- 1         892      3 Kelly,… male   34.5     0     0 330911  7.83 &lt;NA&gt;  Q      
- 2         893      3 Wilkes… fema…  47       1     0 363272  7    &lt;NA&gt;  S      
- 3         894      2 Myles,… male   62       0     0 240276  9.69 &lt;NA&gt;  Q      
- 4         895      3 Wirz, … male   27       0     0 315154  8.66 &lt;NA&gt;  S      
- 5         896      3 Hirvon… fema…  22       1     1 31012… 12.3  &lt;NA&gt;  S      
- 6         897      3 Svenss… male   14       0     0 7538    9.22 &lt;NA&gt;  S      
- 7         898      3 Connol… fema…  30       0     0 330972  7.63 &lt;NA&gt;  Q      
- 8         899      2 Caldwe… male   26       1     1 248738 29    &lt;NA&gt;  S      
- 9         900      3 Abrahi… fema…  18       0     0 2657    7.23 &lt;NA&gt;  C      
-10         901      3 Davies… male   21       2     0 A/4 4… 24.2  &lt;NA&gt;  S      
-# … with abbreviated variable name ¹​Embarked</code></pre>
-</div>
-</div>
-<section id="quantidade-de-observações-1" class="level4" data-number="3.2.2.1">
-<h4 data-number="3.2.2.1" class="anchored" data-anchor-id="quantidade-de-observações-1"><span class="header-section-number">3.2.2.1</span> Quantidade de Observações</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(test)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 418</code></pre>
-</div>
-</div>
-</section>
-<section id="quantidade-de-variáveis-1" class="level4" data-number="3.2.2.2">
-<h4 data-number="3.2.2.2" class="anchored" data-anchor-id="quantidade-de-variáveis-1"><span class="header-section-number">3.2.2.2</span> Quantidade de Variáveis</h4>
-<p>Já é sabido que nesta amostragem não há a variável (<code>Survived</code>), uma vez que é o que esperamos que o modelo nos responda.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(test)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 11</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="detalhamento-das-variáveis" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="detalhamento-das-variáveis"><span class="header-section-number">3.2.3</span> Detalhamento das Variáveis</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(train)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>spc_tbl_ [891 × 12] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
- $ PassengerId: num [1:891] 1 2 3 4 5 6 7 8 9 10 ...
- $ Survived   : num [1:891] 0 1 1 1 0 0 0 0 1 1 ...
- $ Pclass     : num [1:891] 3 1 3 1 3 3 1 3 3 2 ...
- $ Name       : chr [1:891] "Braund, Mr. Owen Harris" "Cumings, Mrs. John Bradley (Florence Briggs Thayer)" "Heikkinen, Miss. Laina" "Futrelle, Mrs. Jacques Heath (Lily May Peel)" ...
- $ Sex        : chr [1:891] "male" "female" "female" "female" ...
- $ Age        : num [1:891] 22 38 26 35 35 NA 54 2 27 14 ...
- $ SibSp      : num [1:891] 1 1 0 1 0 0 0 3 0 1 ...
- $ Parch      : num [1:891] 0 0 0 0 0 0 0 1 2 0 ...
- $ Ticket     : chr [1:891] "A/5 21171" "PC 17599" "STON/O2. 3101282" "113803" ...
- $ Fare       : num [1:891] 7.25 71.28 7.92 53.1 8.05 ...
- $ Cabin      : chr [1:891] NA "C85" NA "C123" ...
- $ Embarked   : chr [1:891] "S" "C" "S" "S" ...
- - attr(*, "spec")=
-  .. cols(
-  ..   PassengerId = col_double(),
-  ..   Survived = col_double(),
-  ..   Pclass = col_double(),
-  ..   Name = col_character(),
-  ..   Sex = col_character(),
-  ..   Age = col_double(),
-  ..   SibSp = col_double(),
-  ..   Parch = col_double(),
-  ..   Ticket = col_character(),
-  ..   Fare = col_double(),
-  ..   Cabin = col_character(),
-  ..   Embarked = col_character()
-  .. )
- - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
-</div>
-</div>
+<section id="dicionário-de-dados" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="dicionário-de-dados"><span class="header-section-number">3.2.4</span> Dicionário de Dados</h3>
+
 <table class="table">
-<caption><strong>Tabela 2: Dicionário de Dados</strong></caption>
-<colgroup>
-<col style="width: 40%">
-<col style="width: 58%">
-</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Variável</th>
-<th style="text-align: left;">Descrição</th>
+<th style="text-align: center;">
+<p>
+Variável
+</p>
+</th>
+<th style="text-align: left;">
+<p>
+Descrição
+</p>
+</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">PassengerId</td>
-<td style="text-align: left;">Número de identificação do passageiro</td>
+<td style="text-align: center;">
+<p>
+PassengerId
+</p>
+</td>
+<td style="text-align: left;">
+<p>
+Número de identificação do passageiro
+</p>
+</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Survived</td>
-<td style="text-align: left;"><p>Variável de indicadora de sobrevivência</p>
+<td style="text-align: center;">
+<p>
+Survived
+</p>
+</td>
+<td style="text-align: left;">
+<p>
+Variável indicadora de sobrevivência
+</p>
 <ul>
-<li><p>0 = No</p></li>
-<li><p>1 = Yes</p></li>
-</ul></td>
+<li>
+<p>
+0 = No
+</p>
+</li>
+<li>
+<p>
+1 = Yes
+</p>
+</li>
+</ul>
+</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Pclass</td>
-<td style="text-align: left;"><p>Classe do passsageiro</p>
+<td style="text-align: center;">
+<p>
+Pclass
+</p>
+</td>
+<td style="text-align: left;">
+<p>
+Classe do passsageiro
+</p>
 <ul>
-<li><p>1 = 1st Class</p></li>
-<li><p>2 = 2nd Class</p></li>
-<li><p>3 = 3rd Class</p></li>
-</ul></td>
+<li>
+<p>
+1 = 1st Class
+</p>
+</li>
+<li>
+<p>
+2 = 2nd Class
+</p>
+</li>
+<li>
+<p>
+3 = 3rd Class
+</p>
+</li>
+</ul>
+</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Name</td>
-<td style="text-align: left;">Nome do passageiro</td>
+<td style="text-align: center;">
+<p>
+Name
+</p>
+</td>
+<td style="text-align: left;">
+<p>
+Nome do passageiro
+</p>
+</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Sex</td>
-<td style="text-align: left;"><p>Genero do passageiro</p>
+<td style="text-align: center;">
+<p>
+Sex
+</p>
+</td>
+<td style="text-align: left;">
+<p>
+Genero do passageiro
+</p>
 <ul>
-<li><p>Female</p></li>
-<li><p>Male</p></li>
-</ul></td>
+<li>
+<p>
+Female
+</p>
+</li>
+<li>
+<p>
+Male
+</p>
+</li>
+</ul>
+</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Age</td>
-<td style="text-align: left;">Idade do passageiro</td>
+<td style="text-align: center;">
+<p>
+Age
+</p>
+</td>
+<td style="text-align: left;">
+<p>
+Idade do passageiro
+</p>
+</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">SibSp</td>
-<td style="text-align: left;">Quantidade de irmãos e cônjuges a bordo</td>
+<td style="text-align: center;">
+<p>
+SibSp
+</p>
+</td>
+<td style="text-align: left;">
+<p>
+Quantidade de irmãos e cônjuges a bordo
+</p>
+</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Parch</td>
-<td style="text-align: left;">Quantidade de pais e filhos a bordo</td>
+<td style="text-align: center;">
+<p>
+Parch
+</p>
+</td>
+<td style="text-align: left;">
+<p>
+Quantidade de pais e filhos a bordo
+</p>
+</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Ticket</td>
-<td style="text-align: left;">Número da passagem</td>
+<td style="text-align: center;">
+<p>
+Ticket
+</p>
+</td>
+<td style="text-align: left;">
+<p>
+Número da passagem
+</p>
+</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Fare</td>
-<td style="text-align: left;">Preço da passagem</td>
+<td style="text-align: center;">
+<p>
+Fare
+</p>
+</td>
+<td style="text-align: left;">
+<p>
+Preço da passagem
+</p>
+</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Cabin</td>
-<td style="text-align: left;">Número da Cabine do passageiro</td>
+<td style="text-align: center;">
+<p>
+Cabin
+</p>
+</td>
+<td style="text-align: left;">
+<p>
+Número da Cabine do passageiro
+</p>
+</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Embarked</td>
-<td style="text-align: left;"><p>Porto de embarque</p>
+<td style="text-align: center;">
+<p>
+Embarked
+</p>
+</td>
+<td style="text-align: left;">
+<p>
+Porto de embarque
+</p>
 <ul>
-<li><p>C = Cherbourg</p></li>
-<li><p>Q = Queenstown</p></li>
-<li><p>S = Southampton</p></li>
-</ul></td>
+<li>
+<p>
+C = Cherbourg
+</p>
+</li>
+<li>
+<p>
+Q = Queenstown
+</p>
+</li>
+<li>
+<p>
+S = Southampton
+</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+
+</table>
+</section>
+</section>
+<section id="análise-exploratória" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="análise-exploratória"><span class="header-section-number">3.3</span> Análise Exploratória</h2>
+<p>Nesta etapa é feita a preparação dos dados para que eles estejam aptos para receber qualquer técnica de aplicação estatística.</p>
+<section id="tratamento-dos-dados" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="tratamento-dos-dados"><span class="header-section-number">3.3.1</span> Tratamento dos Dados</h3>
+<section id="tipo-de-variável" class="level4" data-number="3.3.1.1">
+<h4 data-number="3.3.1.1" class="anchored" data-anchor-id="tipo-de-variável"><span class="header-section-number">3.3.1.1</span> Tipo de Variável</h4>
+<p>A variável <code>Survived</code>, é a variável <em>alvo</em> (dependente), ou seja, a variável de estudo e, está definida como <em>númerica</em>, por essa razão, é preciso transformá-la em uma variável do tipo <em>factor</em> pois trata-se de uma variável do tipo categórica.</p>
+<p>O mesmo tratamento se aplicam às variáveis <code>Sex</code>, <code>Pclass</code> e <code>Embarked</code></p>
+<table class="table">
+<caption>Classificação das variáveis antes do tratamento</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Variável</th>
+<th style="text-align: center;">Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>Survived</code></td>
+<td style="text-align: center;">numeric</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>Sex</code></td>
+<td style="text-align: center;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>Pclass</code></td>
+<td style="text-align: center;">numeric</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>Embarked</code></td>
+<td style="text-align: center;">character</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>Survived <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(fulldados<span class="sc">$</span>Survived),</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>Sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(fulldados<span class="sc">$</span>Sex),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>Pclass <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(fulldados<span class="sc">$</span>Pclass),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1stClass"</span>, <span class="st">"2ndClass"</span>, <span class="st">"3rdClass"</span>))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>Embarked <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(fulldados<span class="sc">$</span>Embarked),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                              <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"C"</span>, <span class="st">"Q"</span>, <span class="st">"S"</span>),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Cherbourg"</span>, <span class="st">"Queenstown"</span>, <span class="st">"Southampton"</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<table class="table">
+<caption>Classificação das variáveis depois da transformação</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Variável</th>
+<th style="text-align: center;">Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>Survived</code></td>
+<td style="text-align: center;">factor</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>Sex</code></td>
+<td style="text-align: center;">factor</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>Pclass</code></td>
+<td style="text-align: center;">factor</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>Embarked</code></td>
+<td style="text-align: center;">factor</td>
 </tr>
 </tbody>
 </table>
 </section>
-</section>
-<section id="análise-exploratória-dos-dados" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="análise-exploratória-dos-dados"><span class="header-section-number">3.3</span> Análise Exploratória dos Dados</h2>
+<section id="valores-vazios" class="level4" data-number="3.3.1.2">
+<h4 data-number="3.3.1.2" class="anchored" data-anchor-id="valores-vazios"><span class="header-section-number">3.3.1.2</span> Valores Vazios</h4>
+<p>As variáveis <code>Age</code>, <code>Fare</code> e <code>Embarked</code> apresentam valores vazios (<em>NA’s</em>).</p>
+<p>Para a contrução do modelo de <em>machine learning</em> tem-se duas opções:</p>
+<ol type="1">
+<li><p>Eliminar essas observações e/ou,</p></li>
+<li><p>Atribuir-lhes um valor.</p></li>
+</ol>
+<p>Neste caso, será considerado apenas a opção (<em>2</em>).</p>
+<p>⚠️ <strong><em>Variável Idade</em></strong> (<code>Age</code>)</p>
+<p>Atribuir a mediana agrupada por gênero.</p>
+<ul>
+<li><strong>Quantidade de valores vazios:</strong> <em>263</em></li>
+<li><strong>Dados estatísticos:</strong></li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(train)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fulldados <span class="ot">&lt;-</span> fulldados <span class="sc">%&gt;%</span> <span class="co">#Atribuir o valor da mediana na variável Age agrupado por gênero</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Age =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Age), <span class="fu">median</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), Age))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(fulldados<span class="sc">$</span>Age)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>  PassengerId       Survived          Pclass          Name          
- Min.   :  1.0   Min.   :0.0000   Min.   :1.000   Length:891        
- 1st Qu.:223.5   1st Qu.:0.0000   1st Qu.:2.000   Class :character  
- Median :446.0   Median :0.0000   Median :3.000   Mode  :character  
- Mean   :446.0   Mean   :0.3838   Mean   :2.309                     
- 3rd Qu.:668.5   3rd Qu.:1.0000   3rd Qu.:3.000                     
- Max.   :891.0   Max.   :1.0000   Max.   :3.000                     
-                                                                    
-     Sex                 Age            SibSp           Parch       
- Length:891         Min.   : 0.42   Min.   :0.000   Min.   :0.0000  
- Class :character   1st Qu.:20.12   1st Qu.:0.000   1st Qu.:0.0000  
- Mode  :character   Median :28.00   Median :0.000   Median :0.0000  
-                    Mean   :29.70   Mean   :0.523   Mean   :0.3816  
-                    3rd Qu.:38.00   3rd Qu.:1.000   3rd Qu.:0.0000  
-                    Max.   :80.00   Max.   :8.000   Max.   :6.0000  
-                    NA's   :177                                     
-    Ticket               Fare           Cabin             Embarked        
- Length:891         Min.   :  0.00   Length:891         Length:891        
- Class :character   1st Qu.:  7.91   Class :character   Class :character  
- Mode  :character   Median : 14.45   Mode  :character   Mode  :character  
-                    Mean   : 32.20                                        
-                    3rd Qu.: 31.00                                        
-                    Max.   :512.33                                        
-                                                                          </code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   0.17   22.00   28.00   29.44   35.00   80.00 </code></pre>
+</div>
+</div>
+<p>🎟️<strong><em>Variável Preço do Bilhete</em></strong> (<code>Fare</code>)</p>
+<p>Atribuir o valor da mediana.</p>
+<ul>
+<li><strong>Quantidade de valores vazios:</strong> <em>1</em></li>
+<li><strong>Dados estatísticos:</strong></li>
+</ul>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fulldados <span class="ot">&lt;-</span> fulldados <span class="sc">%&gt;%</span> <span class="co">#Atribuir o valor da mediana na variável Fare agrupado por gênero</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fare =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Fare), <span class="fu">median</span>(Fare, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), Fare))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(fulldados<span class="sc">$</span>Fare)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.000   7.896  14.454  33.279  31.275 512.329 </code></pre>
+</div>
+</div>
+<p>📍<strong><em>Variável Embarque</em></strong> (<code>Embarked</code>)</p>
+<p>Atribuir o valor de maior frequência.</p>
+<ul>
+<li><strong>Quantidade de valores vazios:</strong> <em>2</em></li>
+<li><strong>Quantidade de passageiros por local de embarque:</strong></li>
+</ul>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>Embarked <span class="ot">&lt;-</span> <span class="fu">replace</span>(fulldados<span class="sc">$</span>Embarked, <span class="fu">which</span>(<span class="fu">is.na</span>(fulldados<span class="sc">$</span>Embarked)), <span class="st">"Southampton"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fulldados<span class="sc">$</span>Embarked)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Cherbourg  Queenstown Southampton 
+        270         123         916 </code></pre>
 </div>
 </div>
 </section>
+<section id="criação-de-novas-variáveis" class="level4" data-number="3.3.1.3">
+<h4 data-number="3.3.1.3" class="anchored" data-anchor-id="criação-de-novas-variáveis"><span class="header-section-number">3.3.1.3</span> Criação de Novas Variáveis</h4>
+<p>O tamanho da família e a faixa etária podem ter um papel importante na predição.</p>
+<p>Dessa forma, variáveis serão unificadas e transformadas para se criar 03 novas variáveis, a saber:</p>
+<p>▪ <strong>Quantidade de Membros na Família</strong> (<code>FamilyMembr</code>)</p>
+<p>▪ <strong>Tamanho da Família</strong> (<code>FamilySize</code>)</p>
+<p>▪️ <strong>Faixa Etária</strong> (<code>AgeGP</code>)</p>
+<p>👨‍👧‍👦<strong><em>Quantidade de Membros na Família</em></strong> (<code>FamilyMembr</code>)</p>
+<p>Gerada a partir da soma do número de irmãos/cônjuges (<code>SibSP</code>) e pais/filhos (<code>Parch</code>).</p>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>FamilyMembr <span class="ot">&lt;-</span> fulldados<span class="sc">$</span>SibSp <span class="sc">+</span> fulldados<span class="sc">$</span>Parch <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>👨‍👩‍👧‍👦<strong><em>Tamanho da Família</em></strong> (<code>FamilySize</code>)</p>
+<p>Variável criada para categorizar a quantidade de membros da familia em grupos</p>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>FamilySize[fulldados<span class="sc">$</span>FamilyMembr <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">'Individual'</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>FamilySize[fulldados<span class="sc">$</span>FamilyMembr <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">&amp;</span> fulldados<span class="sc">$</span>FamilyMembr <span class="sc">&gt;</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">'Pequena'</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>FamilySize[fulldados<span class="sc">$</span>FamilyMembr <span class="sc">&gt;</span> <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="st">'Grande'</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>FamilySize <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(fulldados<span class="sc">$</span>FamilySize)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<table class="table">
+<caption>Categoria do tamanho da família</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Quantidade de Membros</th>
+<th style="text-align: center;">Tamanho da Família</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Igual a 1</td>
+<td style="text-align: center;">Individual</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Maior que 1 e menor que 5</td>
+<td style="text-align: center;">Pequena</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Maior que 4</td>
+<td style="text-align: center;">Grande</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fulldados<span class="sc">$</span>FamilySize)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Grande Individual    Pequena 
+        82        790        437 </code></pre>
+</div>
+</div>
+<p>🔞<strong><em>Faixa Etária</em></strong> (<code>AgeGP</code>)</p>
+<p>Variável criada para categorizar os passageios em grupos de idade menor de 18 anos (<em>infantil</em>) e maior de 18 anos (<em>adulto</em>)</p>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>AgeGP[fulldados<span class="sc">$</span>Age <span class="sc">&lt;</span> <span class="dv">18</span>] <span class="ot">&lt;-</span> <span class="st">'Infantil'</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>AgeGP[fulldados<span class="sc">$</span>Age <span class="sc">&gt;=</span> <span class="dv">18</span>] <span class="ot">&lt;-</span> <span class="st">'Adulto'</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>fulldados<span class="sc">$</span>AgeGP <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(fulldados<span class="sc">$</span>AgeGP)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fulldados<span class="sc">$</span>AgeGP)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Adulto Infantil 
+    1155      154 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="visualização-exploratória-da-distribuição-dos-sobreviventes" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="visualização-exploratória-da-distribuição-dos-sobreviventes"><span class="header-section-number">3.3.2</span> Visualização Exploratória da Distribuição dos Sobreviventes</h3>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>G1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(fulldados[<span class="dv">1</span><span class="sc">:</span><span class="dv">891</span>,], <span class="fu">aes</span>(<span class="at">x =</span> FamilyMembr, <span class="at">fill =</span> Survived)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'count'</span>, <span class="at">position=</span><span class="st">'dodge'</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">color =</span> <span class="st">"dark gray"</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Quantidade de Membros'</span>, <span class="at">y =</span> <span class="st">"Passageiros"</span>)<span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">ggtitle</span>(<span class="st">"Tamanho da Família"</span>);</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>G2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(fulldados[<span class="dv">1</span><span class="sc">:</span><span class="dv">891</span>,], <span class="fu">aes</span>(<span class="at">x =</span> FamilySize, <span class="at">fill =</span> Survived)) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'count'</span>, <span class="at">position=</span><span class="st">'dodge'</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">color =</span> <span class="st">"dark gray"</span>) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Categoria'</span>, <span class="at">y =</span> <span class="st">"Passageiros"</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(G1, G2, <span class="at">ncol =</span> <span class="dv">1</span>,<span class="at">common.legend =</span> <span class="cn">TRUE</span>, <span class="at">legend =</span> <span class="st">"right"</span>); </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/Grafico%20de%20sobreviventes%20por%20tamanho%20de%20família-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(fulldados[<span class="dv">1</span><span class="sc">:</span><span class="dv">891</span>,], <span class="fu">aes</span>(<span class="at">x =</span> Age, <span class="at">fill =</span> Survived)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Taxa de Sobrevivência por Idade, Gênero e Classe do Bilhete"</span>)<span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Sex<span class="sc">~</span>Pclass, <span class="at">scales =</span> <span class="st">"free"</span>)<span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Idade"</span>, <span class="at">y =</span> <span class="st">"Taxa de Sobreviventes"</span>)<span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binwidth =</span> <span class="dv">3</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/Taxa%20de%20sobreviência%20por%20idade,%20gênero%20e%20classe%20do%20bilhete-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fulldados[<span class="dv">1</span><span class="sc">:</span><span class="dv">891</span>,], <span class="fu">aes</span>(<span class="at">x =</span> AgeGP, <span class="at">fill =</span> Survived)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Sobreviventes por Faixa Etária, Gênero e Classe do Bilhete"</span>)<span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Sex<span class="sc">~</span>Pclass, <span class="at">scales =</span> <span class="st">"free"</span>)<span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span> <span class="st">"Faixa Etária"</span>, <span class="at">y =</span> <span class="st">"Passageiros"</span>)<span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">'count'</span>, <span class="at">position=</span><span class="st">'dodge'</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">color =</span> <span class="st">"dark gray"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/Grafico%20de%20sobreviventes%20por%20faixa%20etária,%20gênero%20e%20classe%20do%20bilhete-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="preparação-dos-dados-para-o-modelo-de-machine-learning" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="preparação-dos-dados-para-o-modelo-de-machine-learning"><span class="header-section-number">3.4</span> Preparação dos Dados para o Modelo de Machine Learning</h2>
+<section id="seleção-das-variáveis" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="seleção-das-variáveis"><span class="header-section-number">3.4.1</span> Seleção das variáveis</h3>
+<p>Como pode ser observado abaixo, após tratar os dados, o modelo de dados <code>fulldados</code> passou de 12 para 18 variáveis. Contudo, nem todas as variáveis (<em>features</em>) precisam ser consideradas na análise.</p>
+<p>Neste caso, as variáveis <code>PassengerId</code>,<code>Name</code>, <code>Age</code>, <code>SibSp</code>, <code>Parch</code>, <code>Ticket</code>,<code>Fare</code>,<code>Cabin</code> e <code>FamilyMembr</code> não serão consideradas pelo modelo de aprendizagem de máquina.</p>
+</section>
+<section id="conversão-de-variáveis-em-dummies" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="conversão-de-variáveis-em-dummies"><span class="header-section-number">3.4.2</span> Conversão de Variáveis em <em>dummies</em></h3>
+<p>As variáveis <code>Sex</code>,<code>Pclass</code>, <code>Embarked</code>, <code>FamilySize</code> e <code>AgeGP</code> são as variáveis <em>explicativas</em>, ou seja, os fatores que influenciam a variável alvo<code>Survived</code>. E por isso, é preciso transformá-las em variavéis <em>dummies</em>.</p>
+<p>Segundo <span class="citation" data-cites="favero2016analise">FÁVERO; FAVERO (<a href="#ref-favero2016analise" role="doc-biblioref">2016</a>)</span>, uma variável dicotômica ou binária (dummy) pode assumir apenas duas categorias, sendo que os valores O ou 1 são atribuídos a essas categorias. O valor 1 é atribuído quando a característica de interesse está presente na variável e o valor O, ou caso contrário.</p>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove variável dummizada original;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Definer como categoria de referência a dummy mais frequente.</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>fulldados <span class="ot">&lt;-</span> <span class="fu">dummy_columns</span>(fulldados,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">select_columns =</span> <span class="st">"Sex"</span>, </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">remove_selected_columns =</span> T,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">remove_most_frequent_dummy =</span> T)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>fulldados <span class="ot">&lt;-</span> <span class="fu">dummy_columns</span>(fulldados,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">select_columns =</span> <span class="st">"Pclass"</span>, </span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">remove_selected_columns =</span> T,</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">remove_most_frequent_dummy =</span> T)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>fulldados <span class="ot">&lt;-</span> <span class="fu">dummy_columns</span>(fulldados,</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">select_columns =</span> <span class="st">"Embarked"</span>, </span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">remove_selected_columns =</span> T,</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">remove_most_frequent_dummy =</span> T)</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>fulldados <span class="ot">&lt;-</span> <span class="fu">dummy_columns</span>(fulldados,</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">select_columns =</span> <span class="st">"FamilySize"</span>, </span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">remove_selected_columns =</span> T,</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">remove_most_frequent_dummy =</span> T)</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>fulldados <span class="ot">&lt;-</span> <span class="fu">dummy_columns</span>(fulldados,</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">select_columns =</span> <span class="st">"AgeGP"</span>, </span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">remove_selected_columns =</span> T,</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">remove_most_frequent_dummy =</span> T)</span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fulldados)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  PassengerId   Survived       Name                Age            SibSp       
+ Min.   :   1   No  :549   Length:1309        Min.   : 0.17   Min.   :0.0000  
+ 1st Qu.: 328   Yes :342   Class :character   1st Qu.:22.00   1st Qu.:0.0000  
+ Median : 655   NA's:418   Mode  :character   Median :28.00   Median :0.0000  
+ Mean   : 655                                 Mean   :29.44   Mean   :0.4989  
+ 3rd Qu.: 982                                 3rd Qu.:35.00   3rd Qu.:1.0000  
+ Max.   :1309                                 Max.   :80.00   Max.   :8.0000  
+     Parch          Ticket               Fare            Cabin          
+ Min.   :0.000   Length:1309        Min.   :  0.000   Length:1309       
+ 1st Qu.:0.000   Class :character   1st Qu.:  7.896   Class :character  
+ Median :0.000   Mode  :character   Median : 14.454   Mode  :character  
+ Mean   :0.385                      Mean   : 33.279                     
+ 3rd Qu.:0.000                      3rd Qu.: 31.275                     
+ Max.   :9.000                      Max.   :512.329                     
+  FamilyMembr       Sex_Female    Pclass_1stClass  Pclass_2ndClass 
+ Min.   : 1.000   Min.   :0.000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.: 1.000   1st Qu.:0.000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median : 1.000   Median :0.000   Median :0.0000   Median :0.0000  
+ Mean   : 1.884   Mean   :0.356   Mean   :0.2468   Mean   :0.2116  
+ 3rd Qu.: 2.000   3rd Qu.:1.000   3rd Qu.:0.0000   3rd Qu.:0.0000  
+ Max.   :11.000   Max.   :1.000   Max.   :1.0000   Max.   :1.0000  
+ Embarked_Cherbourg Embarked_Queenstown FamilySize_Grande FamilySize_Pequena
+ Min.   :0.0000     Min.   :0.00000     Min.   :0.00000   Min.   :0.0000    
+ 1st Qu.:0.0000     1st Qu.:0.00000     1st Qu.:0.00000   1st Qu.:0.0000    
+ Median :0.0000     Median :0.00000     Median :0.00000   Median :0.0000    
+ Mean   :0.2063     Mean   :0.09396     Mean   :0.06264   Mean   :0.3338    
+ 3rd Qu.:0.0000     3rd Qu.:0.00000     3rd Qu.:0.00000   3rd Qu.:1.0000    
+ Max.   :1.0000     Max.   :1.00000     Max.   :1.00000   Max.   :1.0000    
+ AgeGP_Infantil  
+ Min.   :0.0000  
+ 1st Qu.:0.0000  
+ Median :0.0000  
+ Mean   :0.1176  
+ 3rd Qu.:0.0000  
+ Max.   :1.0000  </code></pre>
+</div>
+</div>
+</section>
+<section id="recuperando-os-banco-de-dados" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="recuperando-os-banco-de-dados"><span class="header-section-number">3.4.3</span> Recuperando os Banco de Dados</h3>
+<p>Inicialmente os bancos de dados <code>train.csv</code> e <code>test.csv</code> foram unificados, gerando o bando de dados <code>fulldados</code>, no intuito de facilitar a análise e o tratamento dos dados.</p>
+<p>Para a construção do modelo de aprendizagem de máquina é necessário separar os bancos de dados para que fiquem como era no começo.</p>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> fulldados[<span class="dv">1</span><span class="sc">:</span><span class="dv">891</span>,] </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> fulldados[<span class="dv">892</span><span class="sc">:</span><span class="dv">1309</span>,]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+<section id="contrução-do-modelo-de-machine-learning" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="contrução-do-modelo-de-machine-learning"><span class="header-section-number">3.5</span> Contrução do Modelo de <em>Machine Learning</em></h2>
+<p>Por se tratar de um problema de classificação, onde deseja-se saber se o passageiro sobreviveu ou não a catástrofe.</p>
+<p>Será utilizado O modelo de aprendizagem de máquina do tipo supervisionado e o algoritmo escolhido será o <em>Ramdom Forest</em>.</p>
+<section id="random-forest" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="random-forest"><span class="header-section-number">3.5.1</span> Random Forest</h3>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co">#Permitir que o resultado seja reprodutível.</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>floresta <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(<span class="fu">factor</span>(Survived) <span class="sc">~</span> Sex_Female <span class="sc">+</span> Pclass_1stClass <span class="sc">+</span> Pclass_2ndClass <span class="sc">+</span> Embarked_Cherbourg <span class="sc">+</span> Embarked_Queenstown <span class="sc">+</span> FamilySize_Grande <span class="sc">+</span> FamilySize_Pequena <span class="sc">+</span> AgeGP_Infantil,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a> <span class="at">data =</span> train, <span class="at">importance =</span> <span class="cn">TRUE</span>, <span class="at">ntree =</span> <span class="dv">1000</span>,<span class="at">mtry=</span><span class="dv">2</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(floresta)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+ randomForest(formula = factor(Survived) ~ Sex_Female + Pclass_1stClass +      Pclass_2ndClass + Embarked_Cherbourg + Embarked_Queenstown +      FamilySize_Grande + FamilySize_Pequena + AgeGP_Infantil,      data = train, importance = TRUE, ntree = 1000, mtry = 2) 
+               Type of random forest: classification
+                     Number of trees: 1000
+No. of variables tried at each split: 2
+
+        OOB estimate of  error rate: 17.73%
+Confusion matrix:
+     No Yes class.error
+No  487  62   0.1129326
+Yes  96 246   0.2807018</code></pre>
+</div>
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(floresta)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">importance</span>(floresta)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           No       Yes MeanDecreaseAccuracy MeanDecreaseGini
+Sex_Female          60.023271 73.412421            71.923996        89.272580
+Pclass_1stClass     19.005073 26.822325            27.724761        21.783253
+Pclass_2ndClass     12.173736 18.314318            20.573361         7.721461
+Embarked_Cherbourg   6.023927  3.560773             7.734096         5.272720
+Embarked_Queenstown -6.085044 11.737989             9.437774         1.902406
+FamilySize_Grande   29.993667  7.406141            30.035335         7.521737
+FamilySize_Pequena  13.296138 18.875868            22.003418        15.333642
+AgeGP_Infantil      19.801986 22.920258            28.401540         8.334517</code></pre>
+</div>
+</div>
+<p>Agora que o modelo foi treinado, é o momento de utilizar as informações do banco de dados de teste.</p>
+<div class="cell">
+<details>
+<summary>Mostrar Código</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Resultado <span class="ot">&lt;-</span> <span class="fu">predict</span>(floresta, test)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>submission <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">PassengerID =</span> test<span class="sc">$</span>PassengerId, <span class="at">Survived =</span> Resultado)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(submission, <span class="at">file =</span> <span class="st">'Submission.csv'</span>, <span class="at">row.names =</span> F)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>A Acurácia do modelo é de 70%</p>
+</section>
+</section>
+</section>
+<section id="referências-bibliográficas" class="level1 unnumbered" data-number="4">
+
+
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">4 Referências Bibliográficas</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="1" role="doc-bibliography">
+<div id="ref-favero2016analise" class="csl-entry" role="doc-biblioentry">
+FÁVERO, L. P.; FAVERO, P. <strong>An<span>á</span>lise de dados: modelos de regress<span>ã</span>o com Excel<span></span>, Stata<span></span> e SPSS<span></span></strong>. [s.l.] Elsevier Brasil, 2016. v. 1
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

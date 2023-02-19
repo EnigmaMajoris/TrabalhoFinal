@@ -1,8 +1,12 @@
 ---
 title: "TITANIC: Explorando dados do naufrágio"
 author: "Majory Melo"
-date: 02/04/2023
-format: html
+date: 02/18/2023
+format: html 
+bibliography: referencias.bib
+csl: abnt.csl
+code-fold: true
+code-summary: "Mostrar Código"
 editor: visual
 toc: true
 toc-depth: 4
@@ -12,30 +16,63 @@ number-depth: 4
 theme: 
   light: [flatly, ajustes.css] 
   dark: [darkly, ajustes.css]
-execute:
-  echo: true
-  warning: false
 lang: pt
 ---
 
+```{r Carregamento de Pacotes, message=FALSE, warning=FALSE, include=FALSE}
+library(leaflet)
+library(tidyverse)
+library(ggplot2)
+library(ggpubr)
+library(fastDummies)
+library(randomForest)
+
+```
+
 # Introdução
 
-O presente documento é parte integrante do trabalho de conclusão do Curso de Verão IME-USP 2022 - Relatórios reprodutíveis com R.
+O presente documento é o trabalho de conclusão do Curso de Verão IME-USP 2022 - Relatórios reprodutíveis com R, e tem por objetivo demostrar os conceitos e técnicas abordadas ao longo do curso para a elaboração de relatórios reprodutíveis em R.
+
+O tema escolhido para estruturar o relatório é a construção de um modelo de *machine learning* com base na análise de dados dos passageiros do transatlântico Titanic, que afundou em sua viagem inaugural em 1912.
+
+Para isso, o documento se divide em 03 partes:
+
+1.  Introdução
+
+    -   Apresentação da justificativa e objetivo do relatório.
+
+2.  História do Titanic
+
+    -   Exposição das informações sobre a construção do navio, o desastre e a relevância do evento nos dias atuais.
+
+3.  Titanic e a Ciência de Dados
+
+    -   Detalhamento dos procedimentos para realização da análise de dados dos passageiros e construção do modelo de predição, bem como a avaliação dos resultados obtidos.
+
+4.  Referencias bibliográficas
+
+    -   Relação da fonte de pesquisa que embasou este documento.
 
 # A História do Titanic
 
 [![RMS Titanic partindo de Southampton em 10 de abril de 1912](imagens/RMS_Titanic_3.jpg){fig-alt="RMS Titanic partindo de Southampton em 10 de abril de 1912" fig-align="left" width="800"}](https://pt.wikipedia.org/wiki/Ficheiro:RMS_Titanic_3.jpg)
 
-No dia 10 de abril de 1912, o maior transatlântico já construído até então zarpava do porto de Southampton, na Inglaterra, com destino a Nova York, em sua viagem inaugural.
+No dia 10 de abril de 1912, o maior transatlântico já construído até então zarpava do porto de Southampton, na Inglaterra, com destino a Nova York.
 
-Na madrugada do dia 14 para o dia 15 de abril, o luxuoso transatlântico colidiu com um iceberg no Atlântico Norte por volta da meia-noite, afundando em menos de três horas. Dos 2.224 passageiros e tripulantes, mais de 1500 pessoas morreram e um pouco mais de 700 conseguiram ser resgatadas pelo navio Carpathia.
+Na madruagada do dia 15 de abril, o luxuoso transatlântico colidiu com um iceberg no Atlântico Norte , afundando em menos de três horas. Dos 2.224 passageiros e tripulantes, mais de 1500 pessoas morreram e um pouco mais de 700 conseguiram ser resgatadas pelo navio Carpathia.
 
 ## Tragetória
 
-blábláblá
+Em Março de 1909 as empresas Harland and Wolff e White Star Line iniciaram a construção do Titanic em Belfast na Irlanda.
+
+Após 03 anos de construção, no dia 10 de abril de 1912 o Titanic ficou pronto para sua viagem inaugural, zarpando do porto de Southampton, Inglaterra.
+
+Ainda no dia 10 ele chega ao porto de Cherbourg na França e no dia 11 ancora em Queenstown, Irlanda de onde seguiu viagem rumo aos Estados Unidos.
+
+No dia 15 de abril, após colidir num iceberg o Tinatic afunda a 500km da costa do Canadá.
 
 ```{r}
-  library(leaflet)
+  
   leaflet()|>
   leaflet::addProviderTiles(provider = "Esri.WorldStreetMap")|>
   addMarkers(lng=-5.90171, lat=54.61473, popup="Local de Construção - Estaleiro Harland & Wolff")|>
@@ -82,137 +119,462 @@ O vídeo abaixo é uma das amostras do material elaborado.
 
 Em 2012, no centenário do naufrágio, a [kaggle.com](http://kaggle.com/competitions/titanic/) lançou o desafio, ***Titanic: Machine Learning from Disaster***, cujo objetivo é através dos dados reais dos passageiros, desenvolver um modelo de aprendizado de máquina que preveja quais passageiros sobreviveram ao naufrágio do Titanic.
 
-Desde então, a competição se popularizou de tal forma que blábláblá....
+Desde então, a competição se popularizou e é amplamente conhecida pelos profissionais da área de ciência de dados.
 
 ## Entendimento do Contexto
 
-Sabemos até aqui que o desastre do Titanic é o mais marcante de todos os tempos.
+Sem dúvidas o desastre do Titanic é o mais marcante de todos os tempos.
 
 Propagandas exageradas, negligência empresarial e humana, além das condições climáticas foram fatores que contribuíram para o desastre.
 
 Independente das causas, o fato é que o naufrágio matou 1502 pessoas de um total de 2224 passageiros.
 
-Embora aqueles que escaparam com vida tiveram sua dose de sorte, alguns grupos de pessoas eram mais propensos a escaparem da morte do que outros. Por exemplo, mulheres, crianças e passageiros da 1ª Classe. Assim, nota-se que existe algum padrão que pode ser extraído dos dados brutos.
+Embora aqueles que escaparam com vida tiveram sua dose de sorte, alguns grupos de pessoas eram mais propensos a sobreviverem do que outros. Por exemplo, mulheres, crianças e passageiros da 1ª Classe. Assim, nota-se que existe algum padrão que pode ser extraído dos dados brutos.
 
-A partir de agora, iniciaremos a análise de dados para identificar quais variáveis contribuem na probabilidade de sobrevivência. Na sequência, construiremos um modelo de *machine learing* que determine se o passageiro, fornecido como *input*, sobreviveu ou não ao naufrágio.
+A partir da análise de dados dos passageiros e etendimento do contexto, será avaliado quais variáveis podem ter contribuido na probabilidade de sobrevivência. Na sequência, será construído um modelo de *machine learing* que determine se o passageiro, fornecido como *input*, sobreviveu ou não ao naufrágio.
 
 ## Importação dos Dados
 
 Foram disponibilizados dois grupos de dados:
 
--   *Dataset* de treino (`train.csv`)
+-   *Dataset* de treino `train.csv`
+
     -   Será utilizado para construção do modelo de *machine learning*;
     -   Informa se o passageiro sobreviveu ou não;
     -   Contém diversas variáveis (*features*) como nome, idade, gênero do passageiro e classe do embarque.
--   *Dataset* de teste (`test.csv`)
-    -   Contém das mesmas variáveis do arquivo (`train.csv`);
+
+-   *Dataset* de teste `test.csv`
+
+    -   Contém das mesmas variáveis do arquivo `train.csv`;
     -   Não informa se o passageiro sobreviveu ou não;
     -   Será usado como dados que nunca forma vistos pelo modelo.
 
-```{r}
-train <- readr::read_csv(
-    here::here("dados", "train.csv"))
+```{r Leitura da base de dados, message=FALSE, warning=FALSE}
+    train <- readr::read_csv(
+        here::here("dados", "train.csv"))
 
-test <- readr::read_csv(
-    here::here("dados", "test.csv"))
+    test <- readr::read_csv(
+        here::here("dados", "test.csv"))
 ```
 
-### Dados da Amostra Treino (`train.csv`)
+### Dados da Amostra Treino
 
-```{r}
-head(train, n=10)
+Exibindo dados das 4 primeiras amostras do banco de dados `train.csv` `r formattable::formattable(head(train, n=4))`
+
+-   **Quantidade de Observações (Linhas):** *`r nrow(train)`*
+-   **Quantidade de Variáveis (Colunas):** *`r ncol(train)`*
+
+### Dados da Amostra Teste
+
+Exibindo dados das 4 primeiras amostras do banco de dados `test.csv` `r formattable::formattable(head(test, n=4))`
+
+-   **Quantidade de Observações (Linhas):** *`r nrow(test)`*
+-   **Quantidade de Variáveis (Colunas):** *`r ncol(test)`*
+
+### Unificação da Base de Dados
+
+Unificar a base de dados `train.csv` com a base de dados `test.csv`, para ser usado na construção do modelo e facilitar o tratamento das variáveis.
+
+Para isso, é preciso tratar a base da dados `test.csv` para que tenha-se a coluna `Survived`e assim fique com a mesmas colunas que a base de dados `train.csv`
+
+```{r warning=FALSE, include=FALSE}
+test$Survived <- NA #Adicionando a varável Suvived no banco de dados teste
+fulldados <- rbind(train,test) # Criação de um banco de dados unificado
+
 ```
 
-#### Quantidade de Observações
+Exibindo dados das 4 primeiras amostras do banco de dados `fulldados` `r formattable::formattable(head(fulldados, n=4))`
 
-```{r}
-nrow(train)
+-   **Quantidade de Observações (Linhas):** *`r nrow(fulldados)`*
+-   **Quantidade de Variáveis (Colunas):** *`r ncol(fulldados)`*
+
+### Dicionário de Dados
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><p>Variável</p></th>
+<th style="text-align: left;"><p>Descrição</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><p>PassengerId</p></td>
+<td style="text-align: left;"><p>Número de identificação do passageiro</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p>Survived</p></td>
+<td style="text-align: left;"><p>Variável indicadora de sobrevivência</p>
+<ul>
+<li><p>0 = No</p></li>
+<li><p>1 = Yes</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><p>Pclass</p></td>
+<td style="text-align: left;"><p>Classe do passsageiro</p>
+<ul>
+<li><p>1 = 1st Class</p></li>
+<li><p>2 = 2nd Class</p></li>
+<li><p>3 = 3rd Class</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p>Name</p></td>
+<td style="text-align: left;"><p>Nome do passageiro</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><p>Sex</p></td>
+<td style="text-align: left;"><p>Genero do passageiro</p>
+<ul>
+<li><p>Female</p></li>
+<li><p>Male</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p>Age</p></td>
+<td style="text-align: left;"><p>Idade do passageiro</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><p>SibSp</p></td>
+<td style="text-align: left;"><p>Quantidade de irmãos e cônjuges a bordo</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p>Parch</p></td>
+<td style="text-align: left;"><p>Quantidade de pais e filhos a bordo</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><p>Ticket</p></td>
+<td style="text-align: left;"><p>Número da passagem</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p>Fare</p></td>
+<td style="text-align: left;"><p>Preço da passagem</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><p>Cabin</p></td>
+<td style="text-align: left;"><p>Número da Cabine do passageiro</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><p>Embarked</p></td>
+<td style="text-align: left;"><p>Porto de embarque</p>
+<ul>
+<li><p>C = Cherbourg</p></li>
+<li><p>Q = Queenstown</p></li>
+<li><p>S = Southampton</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+
+## Análise Exploratória
+
+Nesta etapa é feita a preparação dos dados para que eles estejam aptos para receber qualquer técnica de aplicação estatística.
+
+### Tratamento dos Dados
+
+#### Tipo de Variável
+
+A variável `Survived`, é a variável *alvo* (dependente), ou seja, a variável de estudo e, está definida como *númerica*, por essa razão, é preciso transformá-la em uma variável do tipo *factor* pois trata-se de uma variável do tipo categórica.
+
+O mesmo tratamento se aplicam às variáveis `Sex`, `Pclass` e `Embarked`
+
+|  Variável  |             Tipo              |
+|:----------:|:-----------------------------:|
+| `Survived` | `r class(fulldados$Survived)` |
+|   `Sex`    |   `r class(fulldados$Sex)`    |
+|  `Pclass`  |  `r class(fulldados$Pclass)`  |
+| `Embarked` | `r class(fulldados$Embarked)` |
+
+: Classificação das variáveis antes do tratamento
+
+```{r Transformar variavel para tipo Factor}
+fulldados$Survived <- factor(c(fulldados$Survived),
+                              levels = c(0,1), 
+                              labels = c("No", "Yes"))
+
+fulldados$Sex <- factor(c(fulldados$Sex),
+                              levels = c("male", "female"),
+                              labels = c("Male", "Female"))
+
+fulldados$Pclass <- factor(c(fulldados$Pclass),
+                              levels = c(1, 2, 3),
+                              labels = c("1stClass", "2ndClass", "3rdClass"))
+
+fulldados$Embarked <- factor(c(fulldados$Embarked),
+                              levels = c("C", "Q", "S"),
+                              labels = c("Cherbourg", "Queenstown", "Southampton"))
+
 ```
 
-#### Quantidade de Variáveis
+|  Variável  |             Tipo              |
+|:----------:|:-----------------------------:|
+| `Survived` | `r class(fulldados$Survived)` |
+|   `Sex`    |   `r class(fulldados$Sex)`    |
+|  `Pclass`  |  `r class(fulldados$Pclass)`  |
+| `Embarked` | `r class(fulldados$Embarked)` |
 
-```{r}
-ncol(train)
+: Classificação das variáveis depois da transformação
+
+#### Valores Vazios
+
+As variáveis `Age`, `Fare` e `Embarked` apresentam valores vazios (*NA's*).
+
+Para a contrução do modelo de *machine learning* tem-se duas opções:
+
+1.  Eliminar essas observações e/ou,
+
+2.  Atribuir-lhes um valor.
+
+Neste caso, será considerado apenas a opção (*2*).
+
+⚠️ ***Variável Idade*** (`Age`)
+
+Atribuir a mediana agrupada por gênero.
+
+-   **Quantidade de valores vazios:** *`r sum(is.na(fulldados$Age))`*
+-   **Dados estatísticos:**
+
+```{r Atibuir o valor da mediana nas variável Age, echo=TRUE, warning=FALSE}
+
+fulldados <- fulldados %>% #Atribuir o valor da mediana na variável Age agrupado por gênero
+  group_by(Sex) %>% 
+  mutate(Age = ifelse(is.na(Age), median(Age, na.rm = TRUE), Age))
+  summary(fulldados$Age)
+
 ```
 
-### Dados da Amostra Teste (`test.csv`)
+🎟️***Variável Preço do Bilhete*** (`Fare`)
 
-```{r}
-head(test, n=10)
+Atribuir o valor da mediana.
+
+-   **Quantidade de valores vazios:** *`r sum(is.na(fulldados$Fare))`*
+-   **Dados estatísticos:**
+
+```{r Atibuir o valor da mediana nas variável Fare, echo=TRUE, warning=FALSE}
+
+fulldados <- fulldados %>% #Atribuir o valor da mediana na variável Fare agrupado por gênero
+  mutate(Fare = ifelse(is.na(Fare), median(Fare, na.rm = TRUE), Fare))
+  summary(fulldados$Fare)
+  
 ```
 
-#### Quantidade de Observações
+📍***Variável Embarque*** (`Embarked`)
+
+Atribuir o valor de maior frequência.
+
+-   **Quantidade de valores vazios:** *`r sum(is.na(fulldados$Embarked))`*
+-   **Quantidade de passageiros por local de embarque:**
 
 ```{r}
-nrow(test)
+
+fulldados$Embarked <- replace(fulldados$Embarked, which(is.na(fulldados$Embarked)), "Southampton")
+summary(fulldados$Embarked)
+
 ```
 
-#### Quantidade de Variáveis
+#### Criação de Novas Variáveis
 
-Já é sabido que nesta amostragem não há a variável (`Survived`), uma vez que é o que esperamos que o modelo nos responda.
+O tamanho da família e a faixa etária podem ter um papel importante na predição.
+
+Dessa forma, variáveis serão unificadas e transformadas para se criar 03 novas variáveis, a saber:
+
+▪ **Quantidade de Membros na Família** (`FamilyMembr`)
+
+▪ **Tamanho da Família** (`FamilySize`)
+
+▪️ **Faixa Etária** (`AgeGP`)
+
+👨‍👧‍👦***Quantidade de Membros na Família*** (`FamilyMembr`)
+
+Gerada a partir da soma do número de irmãos/cônjuges (`SibSP`) e pais/filhos (`Parch`).
 
 ```{r}
-ncol(test)
+fulldados$FamilyMembr <- fulldados$SibSp + fulldados$Parch + 1
+
 ```
 
-### Detalhamento das Variáveis
+👨‍👩‍👧‍👦***Tamanho da Família*** (`FamilySize`)
+
+Variável criada para categorizar a quantidade de membros da familia em grupos
+
+```{r message=FALSE, warning=FALSE}
+fulldados$FamilySize[fulldados$FamilyMembr == 1] <- 'Individual' 
+fulldados$FamilySize[fulldados$FamilyMembr < 5 & fulldados$FamilyMembr > 1] <- 'Pequena' 
+fulldados$FamilySize[fulldados$FamilyMembr > 4] <- 'Grande' 
+fulldados$FamilySize <- as.factor(fulldados$FamilySize)
+
+```
+
+|   Quantidade de Membros   | Tamanho da Família |
+|:-------------------------:|:------------------:|
+|         Igual a 1         |     Individual     |
+| Maior que 1 e menor que 5 |      Pequena       |
+|        Maior que 4        |       Grande       |
+
+: Categoria do tamanho da família
 
 ```{r}
-str(train)
+summary(fulldados$FamilySize)
+
 ```
 
-+-------------+-----------------------------------------+
-| Variável    | Descrição                               |
-+:===========:+:========================================+
-| PassengerId | Número de identificação do passageiro   |
-+-------------+-----------------------------------------+
-| Survived    | Variável de indicadora de sobrevivência |
-|             |                                         |
-|             | -   0 = No                              |
-|             |                                         |
-|             | -   1 = Yes                             |
-+-------------+-----------------------------------------+
-| Pclass      | Classe do passsageiro                   |
-|             |                                         |
-|             | -   1 = 1st Class                       |
-|             |                                         |
-|             | -   2 = 2nd Class                       |
-|             |                                         |
-|             | -   3 = 3rd Class                       |
-+-------------+-----------------------------------------+
-| Name        | Nome do passageiro                      |
-+-------------+-----------------------------------------+
-| Sex         | Genero do passageiro                    |
-|             |                                         |
-|             | -   Female                              |
-|             |                                         |
-|             | -   Male                                |
-+-------------+-----------------------------------------+
-| Age         | Idade do passageiro                     |
-+-------------+-----------------------------------------+
-| SibSp       | Quantidade de irmãos e cônjuges a bordo |
-+-------------+-----------------------------------------+
-| Parch       | Quantidade de pais e filhos a bordo     |
-+-------------+-----------------------------------------+
-| Ticket      | Número da passagem                      |
-+-------------+-----------------------------------------+
-| Fare        | Preço da passagem                       |
-+-------------+-----------------------------------------+
-| Cabin       | Número da Cabine do passageiro          |
-+-------------+-----------------------------------------+
-| Embarked    | Porto de embarque                       |
-|             |                                         |
-|             | -   C = Cherbourg                       |
-|             |                                         |
-|             | -   Q = Queenstown                      |
-|             |                                         |
-|             | -   S = Southampton                     |
-+-------------+-----------------------------------------+
+🔞***Faixa Etária*** (`AgeGP`)
 
-: **Tabela 2: Dicionário de Dados**
+Variável criada para categorizar os passageios em grupos de idade menor de 18 anos (*infantil*) e maior de 18 anos (*adulto*)
 
-## Análise Exploratória dos Dados
+```{r Criação da variável Faixa Etária, message=FALSE, warning=FALSE}
+fulldados$AgeGP[fulldados$Age < 18] <- 'Infantil' 
+fulldados$AgeGP[fulldados$Age >= 18] <- 'Adulto' 
+fulldados$AgeGP <- as.factor(fulldados$AgeGP)
+summary(fulldados$AgeGP)
+
+```
+
+### Visualização Exploratória da Distribuição dos Sobreviventes
+
+```{r Grafico de sobreviventes por tamanho de família, warning=FALSE}
+
+G1 <- ggplot(fulldados[1:891,], aes(x = FamilyMembr, fill = Survived)) +
+ geom_bar(stat='count', position='dodge', alpha = 0.7, color = "dark gray") +
+ labs(x = 'Quantidade de Membros', y = "Passageiros")+
+ ggtitle("Tamanho da Família");
+
+G2 <- ggplot(fulldados[1:891,], aes(x = FamilySize, fill = Survived)) +
+ geom_bar(stat='count', position='dodge', alpha = 0.7, color = "dark gray") +
+ labs(x = 'Categoria', y = "Passageiros")
+
+ggarrange(G1, G2, ncol = 1,common.legend = TRUE, legend = "right"); 
+
+```
+
+```{r Taxa de sobreviência por idade, gênero e classe do bilhete}
+
+  ggplot(fulldados[1:891,], aes(x = Age, fill = Survived)) +
+  labs(title = "Taxa de Sobrevivência por Idade, Gênero e Classe do Bilhete")+
+  facet_grid(Sex~Pclass, scales = "free")+
+  labs(x = "Idade", y = "Taxa de Sobreviventes")+
+  geom_dotplot(binwidth = 3)
+  
+```
+
+```{r Grafico de sobreviventes por faixa etária, gênero e classe do bilhete}
+
+ggplot(fulldados[1:891,], aes(x = AgeGP, fill = Survived)) +
+  labs(title = "Sobreviventes por Faixa Etária, Gênero e Classe do Bilhete")+
+  facet_grid(Sex~Pclass, scales = "free")+
+  labs(x= "Faixa Etária", y = "Passageiros")+
+  geom_bar(stat='count', position='dodge', alpha = 0.7, color = "dark gray")
+
+```
+
+## Preparação dos Dados para o Modelo de Machine Learning
+
+### Seleção das variáveis
+
+Como pode ser observado abaixo, após tratar os dados, o modelo de dados `fulldados` passou de 12 para 18 variáveis. Contudo, nem todas as variáveis (*features*) precisam ser consideradas na análise.
+
+Neste caso, as variáveis `PassengerId`,`Name`, `Age`, `SibSp`, `Parch`, `Ticket`,`Fare`,`Cabin` e `FamilyMembr` não serão consideradas pelo modelo de aprendizagem de máquina.
+
+### Conversão de Variáveis em *dummies*
+
+As variáveis `Sex`,`Pclass`, `Embarked`, `FamilySize` e `AgeGP` são as variáveis *explicativas*, ou seja, os fatores que influenciam a variável alvo`Survived`. E por isso, é preciso transformá-las em variavéis *dummies*.
+
+Segundo @favero2016analise, uma variável dicotômica ou binária (dummy) pode assumir apenas duas categorias, sendo que os valores O ou 1 são atribuídos a essas categorias. O valor 1 é atribuído quando a característica de interesse está presente na variável e o valor O, ou caso contrário.
+
+```{r Convertendo variáveis em dummies, message=FALSE, warning=FALSE}
+#Remove variável dummizada original;
+#Definer como categoria de referência a dummy mais frequente.
+
+fulldados <- dummy_columns(fulldados,
+
+                                   select_columns = "Sex", 
+
+                                   remove_selected_columns = T,
+
+                                   remove_most_frequent_dummy = T)
+
+fulldados <- dummy_columns(fulldados,
+
+                                   select_columns = "Pclass", 
+
+                                   remove_selected_columns = T,
+
+                                   remove_most_frequent_dummy = T)
+
+fulldados <- dummy_columns(fulldados,
+
+                                   select_columns = "Embarked", 
+
+                                   remove_selected_columns = T,
+
+                                   remove_most_frequent_dummy = T)
+
+fulldados <- dummy_columns(fulldados,
+
+                                   select_columns = "FamilySize", 
+
+                                   remove_selected_columns = T,
+
+                                   remove_most_frequent_dummy = T)
+
+fulldados <- dummy_columns(fulldados,
+
+                                   select_columns = "AgeGP", 
+
+                                   remove_selected_columns = T,
+
+                                   remove_most_frequent_dummy = T)
+
+summary(fulldados)
+
+
+```
+
+### Recuperando os Banco de Dados
+
+Inicialmente os bancos de dados `train.csv` e `test.csv` foram unificados, gerando o bando de dados `fulldados`, no intuito de facilitar a análise e o tratamento dos dados.
+
+Para a construção do modelo de aprendizagem de máquina é necessário separar os bancos de dados para que fiquem como era no começo.
 
 ```{r}
-summary(train)
+train <- fulldados[1:891,] 
+test <- fulldados[892:1309,]
 ```
+
+## Contrução do Modelo de *Machine Learning*
+
+Por se tratar de um problema de classificação, onde deseja-se saber se o passageiro sobreviveu ou não a catástrofe.
+
+Será utilizado O modelo de aprendizagem de máquina do tipo supervisionado e o algoritmo escolhido será o *Ramdom Forest*.
+
+### Random Forest
+
+```{r}
+
+set.seed(123) #Permitir que o resultado seja reprodutível.
+floresta <- randomForest(factor(Survived) ~ Sex_Female + Pclass_1stClass + Pclass_2ndClass + Embarked_Cherbourg + Embarked_Queenstown + FamilySize_Grande + FamilySize_Pequena + AgeGP_Infantil,
+ data = train, importance = TRUE, ntree = 1000,mtry=2)
+
+```
+
+```{r}
+
+print(floresta)
+varImpPlot(floresta)
+importance(floresta)
+
+
+```
+
+Agora que o modelo foi treinado, é o momento de utilizar as informações do banco de dados de teste.
+
+```{r}
+Resultado <- predict(floresta, test)
+submission <- data.frame(PassengerID = test$PassengerId, Survived = Resultado)
+write.csv(submission, file = 'Submission.csv', row.names = F)
+```
+
+A Acurácia do modelo é de 70%
+
+# Referências Bibliográficas
