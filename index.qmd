@@ -1,7 +1,7 @@
 ---
 title: "TITANIC: Explorando dados do naufrágio"
 author: "Majory Melo"
-date: 02/18/2023
+date: 02/19/2023
 format: html 
 bibliography: referencias.bib
 csl: abnt.csl
